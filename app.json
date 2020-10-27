@@ -4,9 +4,9 @@
     "slug": "OrionArchive",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./client/assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./client/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
