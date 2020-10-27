@@ -10,6 +10,7 @@ npm-debug.*
 web-build/
 .vscode
 package-lock.json
+.env
 
 # macOS
 .DS_Store
