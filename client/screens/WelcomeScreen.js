@@ -1,7 +1,10 @@
 import React from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
-
 import colors from '../config/colors';
+import HomeScreen from './HomeScreen';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { Component } from 'react';
+
 
 function WelcomeScreen(props) {
   return (
