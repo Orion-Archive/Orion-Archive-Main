@@ -22,8 +22,12 @@ function WelcomeScreen(props) {
         />
         <Text>Relive Past Events</Text>
       </View>
-      <View style={styles.loginButton}></View>
-      <View style={styles.registerButton}></View>
+      <View style={styles.loginButton}>
+        <Text>Login</Text>
+      </View>
+      <View style={styles.registerButton}>
+        <Text>Register</Text>
+      </View>
     </ImageBackground>
   );
 }
