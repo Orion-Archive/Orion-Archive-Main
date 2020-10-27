@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Button, Image } from 'react-native';
 
-require('dotenv').config();
-
 function LoginScreen(props) {
   return (
     <View style={styles.container}>
