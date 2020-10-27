@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import env from '../config/env';
 import { Text, View, StyleSheet, Button, Image } from 'react-native';
 
 function LoginScreen(props) {
@@ -8,6 +7,8 @@ function LoginScreen(props) {
       <Image
         style={styles.logo}
         source={{
+          width: 150,
+          height: 150,
           uri:
             'https://upload.wikimedia.org/wikipedia/commons/e/e0/Orion_logo.png',
         }}
@@ -26,10 +27,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  logo: {
-    width: 150,
-    height: 150,
   },
   title: {
     fontSize: 35,

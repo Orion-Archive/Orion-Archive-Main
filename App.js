@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import LoginScreen from './client/screens/LoginScreen';
 import HomeScreen from './client/screens/HomeScreen';
 
@@ -25,7 +25,11 @@ import HomeScreen from './client/screens/HomeScreen';
  */
 
 export default function App() {
-  return <HomeScreen />;
+  return (
+    <View style={styles.container}>
+      <LoginScreen />
+    </View>
+  );
 }
 
 // APPLYING STYLESHEET.CREATE IS OPTIONAL, CAN REFERENCE A SIMPLE OBJECT TO STYLE; HOWEVER, USING STYLESHEET.CREATE WILL CATCH ANY TYPO STYLE PROPERTY NAMES THAT ARE INVALID
