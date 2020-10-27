@@ -1,28 +1,4 @@
 {
-<<<<<<< HEAD
-	"expo": {
-		"name": "OrionArchive",
-		"slug": "OrionArchive",
-		"version": "1.0.0",
-		"orientation": "portrait",
-		"icon": "./client/assets/icon.png",
-		"splash": {
-			"image": "./client/assets/splash.png",
-			"resizeMode": "contain",
-			"backgroundColor": "#ffffff"
-		},
-		"updates": {
-			"fallbackToCacheTimeout": 0
-		},
-		"assetBundlePatterns": ["**/*"],
-		"ios": {
-			"supportsTablet": true
-		},
-		"web": {
-			"favicon": "./client/assets/favicon.png"
-		}
-	}
-=======
   "expo": {
     "name": "OrionArchive",
     "slug": "OrionArchive",
@@ -45,5 +21,4 @@
       "favicon": "./client/assets/favicon.png"
     }
   }
->>>>>>> 26f05e31956dd8182d79633955c8fd3ed5bb9c64
 }
