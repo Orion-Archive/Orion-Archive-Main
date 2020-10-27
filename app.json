@@ -1,24 +1,24 @@
 {
-  "expo": {
-    "name": "OrionArchive",
-    "slug": "OrionArchive",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./client/assets/icon.png",
-    "splash": {
-      "image": "./client/assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
-  }
+	"expo": {
+		"name": "OrionArchive",
+		"slug": "OrionArchive",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./client/assets/icon.png",
+		"splash": {
+			"image": "./client/assets/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ffffff"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true
+		},
+		"web": {
+			"favicon": "./client/assets/favicon.png"
+		}
+	}
 }
