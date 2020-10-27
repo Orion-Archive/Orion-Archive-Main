@@ -1,6 +1,15 @@
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import WelcomeScreen from './client/screens/WelcomeScreen';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  SafeAreaView,
+  TouchableHighlight,
+  Button,
+  Alert,
+} from 'react-native';
 
 /**
  * NOTE TO TEAM: TO VIEW YOUR IOS APP SIMULATOR
@@ -23,8 +32,43 @@ import WelcomeScreen from './client/screens/WelcomeScreen';
  * 								1. SHAKE YOUR IPHONE TO POPULATE THE DEVELOPER MENU AND CLICK REFRESH
  */
 
-export default function App() {
-  return <WelcomeScreen />;
+export default function SampleApp() {
+  // TEXT ONPRESS HANDLER EXAMPLE
+  const handlePress = () => {
+    console.log('Text Pressed!');
+  };
+
+  return (
+    // VIEW: ACTS LIKE A DIV
+    // VIEW -> SAFEAREAVIEW (IOS ONLY): MAKES SURE THAT THE IPHONE TOP NOTCH DOESN'T COVER OUR CONTENT
+    <View style={styles.container}>
+      <Text onPress={handlePress}>Welcome to Orion Archives</Text>
+      {/* TOUCHABLE TAGS OFFER DIFFERENT USER FEEDBACK WHEN INTERACTING WITH ELEMENTS */}
+      <TouchableHighlight onPress={() => console.log('Image Tapped!')}>
+        {/* Sourced Images from Repo Assets Folder */}
+        {/* <Image source={require('./assets/icon.png')} /> */}
+        {/* Sourced Images from the Interwebs: Width & Height Properties Required */}
+        <Image
+          source={{
+            width: 300,
+            height: 564,
+            uri:
+              'https://www.clipartkey.com/mpngs/m/117-1174303_orion-the-hunter-drawing-orion-drawings-illustration-orion.png',
+          }}
+        />
+      </TouchableHighlight>
+      <Button
+        title="Enter"
+        onPress={() =>
+          Alert.alert('Welcome to Orion Archive', 'Dare to Enter?', [
+            { text: 'Yes', onPress: () => console.log('Yes') },
+            { text: 'No', onPress: () => console.log('No') },
+          ])
+        }
+      />
+      <StatusBar style="auto" />
+    </View>
+  );
 }
 
 // APPLYING STYLESHEET.CREATE IS OPTIONAL, CAN REFERENCE A SIMPLE OBJECT TO STYLE; HOWEVER, USING STYLESHEET.CREATE WILL CATCH ANY TYPO STYLE PROPERTY NAMES THAT ARE INVALID
