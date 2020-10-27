@@ -7,6 +7,8 @@ import {
   Image,
   SafeAreaView,
   TouchableHighlight,
+  Button,
+  Alert,
 } from 'react-native';
 
 export default function App() {
@@ -27,13 +29,22 @@ export default function App() {
         {/* Sourced Images from the Interwebs: Width & Height Properties Required */}
         <Image
           source={{
-            width: 400,
-            height: 752,
+            width: 300,
+            height: 564,
             uri:
               'https://www.clipartkey.com/mpngs/m/117-1174303_orion-the-hunter-drawing-orion-drawings-illustration-orion.png',
           }}
         />
       </TouchableHighlight>
+      <Button
+        title="Enter"
+        onPress={() =>
+          Alert.alert('Welcome to Orion Archive', 'Dare to Enter?', [
+            { text: 'Yes', onPress: () => console.log('Yes') },
+            { text: 'No', onPress: () => console.log('No') },
+          ])
+        }
+      />
       <StatusBar style="auto" />
     </View>
   );
