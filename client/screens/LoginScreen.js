@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import env from '../config/env';
 import { Text, View, StyleSheet, Button, Image } from 'react-native';
 
 function LoginScreen(props) {
