@@ -1,13 +1,18 @@
+<<<<<<< HEAD
 // v-- REPLACE THE EMPTY STRING WITH YOUR LOCAL/MLAB/ELEPHANTSQL URI
 const myURI = "postgres://ayovbbcq:OwwUoR79RTyNzEG9hIHpH_apreH5KLfL@lallah.db.elephantsql.com:5432/ayovbbcq";
+=======
+import env from '../../../client/config/env';
+>>>>>>> 26f05e31956dd8182d79633955c8fd3ed5bb9c64
 
-// UNCOMMENT THE LINE BELOW IF USING MONGO
-// const URI = process.env.MONGO_URI || myURI;
+const { Pool } = require('pg');
 
-// UNCOMMENT THE LINE BELOW IF USING POSTGRESQL
-const URI = process.env.PG_URI || myURI;
+const URI = env.PG_URI;
 
+<<<<<<< HEAD
 const { Pool } = require("pg");
+=======
+>>>>>>> 26f05e31956dd8182d79633955c8fd3ed5bb9c64
 const pool = new Pool({ connectionString: URI });
 
 module.exports = {
