@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View, StyleSheet, Button, Image } from 'react-native';
+
+require('dotenv').config();
 
 function LoginScreen(props) {
   return (
@@ -12,6 +14,7 @@ function LoginScreen(props) {
         }}
       />
       <Text style={styles.title}>Orion Archive</Text>
+      <Text style={styles.signin}>Sign In</Text>
       <Button title="Hello" />
     </View>
   );
@@ -32,10 +35,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 35,
   },
+  signin: {
+    fontSize: 35,
+  },
 });
 
 export default LoginScreen;
-
-// Text: Orion Archive
-// Text: Sign in
-// Button: Login with Google OAuth

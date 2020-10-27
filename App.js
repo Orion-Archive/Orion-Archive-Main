@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import WelcomeScreen from './client/screens/WelcomeScreen';
+import { StyleSheet } from 'react-native';
 import LoginScreen from './client/screens/LoginScreen';
 
 /**
