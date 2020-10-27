@@ -1,6 +1,8 @@
 import React from 'react';
 import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 
+import colors from '../config/colors';
+
 function WelcomeScreen(props) {
   return (
     <ImageBackground
@@ -15,7 +17,7 @@ function WelcomeScreen(props) {
           style={styles.logo}
           source={{
             uri:
-              'https://lh3.googleusercontent.com/proxy/4f9GncCZSVN_AnIvw3lrSL0-qhneEj41HvXKIyt6SDawU8p1W2PX0-36lHENqPd0m5TXzOiMBi3AKrB1w1QagDyenim-Lme7z9Bfq09N',
+              'https://upload.wikimedia.org/wikipedia/commons/e/e0/Orion_logo.png',
           }}
         />
         <Text>Relive Past Events</Text>
@@ -35,12 +37,12 @@ const styles = StyleSheet.create({
   loginButton: {
     width: '100%',
     height: 70,
-    backgroundColor: 'salmon',
+    backgroundColor: colors.secondary,
   },
   registerButton: {
     width: '100%',
     height: 70,
-    backgroundColor: 'dodgerblue',
+    backgroundColor: colors.primary,
   },
   logo: {
     width: 150,

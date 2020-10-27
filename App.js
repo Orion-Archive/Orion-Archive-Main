@@ -1,15 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  SafeAreaView,
-  TouchableHighlight,
-  Button,
-  Alert,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import WelcomeScreen from './client/screens/WelcomeScreen';
 
 /**
@@ -34,11 +24,6 @@ import WelcomeScreen from './client/screens/WelcomeScreen';
  */
 
 export default function App() {
-  // TEXT ONPRESS HANDLER EXAMPLE
-  const handlePress = () => {
-    console.log('Text Pressed!');
-  };
-
   return <WelcomeScreen />;
 }
 
