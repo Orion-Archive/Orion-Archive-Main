@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   loginButton: {
     width: '100%',
     height: 70,
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.primary,
   },
   registerButton: {
     width: '100%',
