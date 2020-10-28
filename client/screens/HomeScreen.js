@@ -116,6 +116,21 @@ function HomeScreen(props) {
           onPress={() => {
             addNewPin();
             console.log(markerList);
+            // dispatch({
+            // type: "addPin",
+            const newPin = {
+              coordinate: {
+                latitude: region.latitude,
+                longitude: region.longitude,
+              },
+              title: `LAFE2`,
+              description: `Here lies a park.2`,
+              pinColor: 'red',
+            };
+            functions.postMarker(newPin);
+            setMarkerList([...markerList, newPin]);
+            // })
+            console.log(markerList);
           }}
         >
           <Text style={styles.addPinButtonText}>Add Pin</Text>
