@@ -108,7 +108,14 @@ function HomeScreen(props) {
           <TouchableOpacity 
               style={styles.addPinButton}
               onPress={() => {
-                addNewPin()
+                const newPin = {
+                  coordinate:{ latitude: region.latitude, longitude: region.longitude },
+                  title:`LAFE2`,
+                  description:`Here lies a park.2`,
+                  pinColor:'red'
+                } 
+                functions.postMarker(newPin).then((returnedPin) => returnedPin? setMarkerList([...markerList, returnedPin]) : alert('Error'));
+                
                 console.log(markerList)
                 }
               }
@@ -118,27 +125,19 @@ function HomeScreen(props) {
           {/* <Text>Your location: {JSON.stringify(location.longitude)}, {JSON.stringify(location.latitude)}</Text> */}
         </View>
 
-        <Button 
+        {/* <Button 
           onPress={() => {
             console.log(markerList)
             // dispatch({ 
             // type: "addPin", 
-            const newPin = {
-              coordinate:{ latitude: region.latitude, longitude: region.longitude },
-              title:`LAFE2`,
-              description:`Here lies a park.2`,
-              pinColor:'red'
-            } 
-            functions.postMarker(newPin).then((returnedPin) => returnedPin? setMarkerList([...markerList, returnedPin]) : alert('Error'));
             
-            console.log(markerList)
             }
           }
           title="Add Pin"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
           style={{backgroundColor: "white", width: '2em', height: '1em'}}
-        />
+        /> */}
 
       </View>
     </MapView>

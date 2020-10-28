@@ -7,7 +7,7 @@ const controller = require('./controllers/dataController')
 app.use(express.json());
 
 app.use("/newMarker", controller.putMarker, (req, res) => {
-	console.log("newMarker route");
+	console.log("newMarker route after middleware");
 	res.status(200).json(res.locals.insertedEvent)
 });
 

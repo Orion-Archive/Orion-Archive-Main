@@ -2,6 +2,7 @@ const db = require("../models/mapDataModel.js");
 
 module.exports = {
 	putMarker: (req, res, next) => {
+		console.log("In putMarker middleware")
 		const { eventName, latitude, longitude, eventDescription } = req.body;
 
 		QUERYSTRING = `INSERT INTO events (event_name, event_description, latitude, longitude, time) VALUES ($1, $2, $3, $4, now()) RETURNING *;`;
