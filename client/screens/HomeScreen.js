@@ -11,23 +11,31 @@ function HomeScreen(props) {
       longitudeDelta: 0.0421,
     })
 
-  const [markerList, dispatch] = useReducer((markerList, { type, newPin }) => {
-      switch (type) {
-        case "addPin":
-          return [...markerList, newPin];
-        case "removePin":
-          return markerList.filter((pin) => pin != newPin);
-        default:
-          return markerList;
-      }
-    }, [{
+  // const [markerList, dispatch] = useReducer((markerList, { type, newPin }) => {
+  //     switch (type) {
+  //       case "addPin":
+  //         return [...markerList, newPin];
+  //       case "removePin":
+  //         return markerList.filter((pin) => pin != newPin);
+  //       default:
+  //         return markerList;
+  //     }
+  //   }, [{
+  //     coordinate:{ latitude: 52.5200066, longitude: 13.404954 },
+  //     title:`LAFE`,
+  //     description:`Here lies a park.`,
+  //     pinColor:'green'
+  //   }]);
+
+  const [markerList, setMarkerList] = useState([
+    {
       coordinate:{ latitude: 52.5200066, longitude: 13.404954 },
       title:`LAFE`,
       description:`Here lies a park.`,
       pinColor:'green'
-    }]);
+    }
+  ]);
 
-  const [newPinInput, setNewPinInput] = useState('');
   const [location, setLocation] = useState({
     latitude: 0,
     longitude: 0,
@@ -102,16 +110,22 @@ function HomeScreen(props) {
         </View>
 
         <Button 
-          onPress={() => dispatch({ 
-            type: "addPin", 
-            value: {
+          onPress={() => {
+            console.log(markerList)
+            // dispatch({ 
+            // type: "addPin", 
+            const newPin = {
               coordinate:{ latitude: region.latitude, longitude: region.longitude },
-              title:`LAFE`,
-              description:`Here lies a park.`,
-              pinColor:'green'
+              title:`LAFE2`,
+              description:`Here lies a park.2`,
+              pinColor:'red'
             } 
-            })}
-          title="Learn More"
+            setMarkerList([...markerList, newPin])
+            // })
+            console.log(markerList)
+            }
+          }
+          title="Add Pin"
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
           style={{backgroundColor: "white", width: '2em', height: '1em'}}
