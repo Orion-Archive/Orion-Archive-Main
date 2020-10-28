@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableHighlight,
+  ImageBackground,
 } from 'react-native';
 import * as Google from 'expo-google-app-auth';
 
@@ -50,15 +51,11 @@ function LoginScreen(props) {
         }}
       />
       <Text style={styles.title}>Orion Archive</Text>
-      <Text style={styles.signin}>Sign In</Text>
       <TouchableHighlight onPress={signInWithGoogle}>
         <Image
-          source={{
-            width: 382,
-            height: 92,
-            uri:
-              'https://github.com/react-native-google-signin/google-signin/blob/master/img/signin-button.png?raw=true',
-          }}
+          style={styles.signin}
+          source={require('../assets/google-oauth-signin.png')}
+          resizeMode="contain"
         />
       </TouchableHighlight>
     </View>
@@ -77,7 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 35,
   },
   signin: {
-    fontSize: 35,
+    width: 250,
   },
 });
 
