@@ -7,6 +7,7 @@ import {
   Image,
   TouchableHighlight,
   ImageBackground,
+  StatusBar,
 } from 'react-native';
 import * as Google from 'expo-google-app-auth';
 
@@ -44,6 +45,7 @@ function LoginScreen(props) {
       style={styles.background}
       source={require('../assets/login-screen-background.png')}
     >
+      <StatusBar barStyle="light-content" />
       <View style={styles.logoContainer}>
         <Image
           style={styles.logo}
