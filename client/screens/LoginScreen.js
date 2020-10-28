@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 35,
   },
   signin: {
+    top: -50,
     width: 250,
   },
 });
