@@ -34,7 +34,7 @@ function HomeScreen(props) {
         provider={PROVIDER_GOOGLE}
         showsUserLocation
         region={region}
-        onRegionChange={(region) => setRegion(region)}
+        onRegionChangeComplete={(region) => setRegion(region)}
     >
       {markerList.map(marker => (
         <Marker
