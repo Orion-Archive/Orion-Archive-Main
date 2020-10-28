@@ -7,7 +7,7 @@ const URI = env.PG_URI;
 const pool = new Pool({ connectionString: URI });
 
 module.exports = {
-  query: (text, params, callback) => {
-    return pool.query(text, params, callback);
-  },
+	query: (text, params, callback) => {
+		return pool.query(text, params, callback);
+	},
 }; // <-- export your model
