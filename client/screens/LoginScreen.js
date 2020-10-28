@@ -1,11 +1,17 @@
 import React from 'react';
-import env from '../config/env';
-import { Text, View, StyleSheet, Button, Image } from 'react-native';
+import { IOS_CLIENT_ID } from '@env';
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  TouchableHighlight,
+} from 'react-native';
 import * as Google from 'expo-google-app-auth';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 
-const iosClientId = env.IOS_CLIENT_ID;
+const iosClientId = IOS_CLIENT_ID;
 
+// REMEMBER TO REQUEST ACCESS FOR EMAIL ADDRESS OR USER PROFILE INFORMATION WHEN SUCCESFULLY LOGGED INTO OAUTH
 function LoginScreen(props) {
   const signInWithGoogle = async () => {
     try {
@@ -15,8 +21,11 @@ function LoginScreen(props) {
       });
 
       if (result.type === 'success') {
-        console.log('LoginScreen.js.js 21 | ', result.user.givenName);
-        this.props.navigation.navigate('Profile', {
+        console.log(
+          'LOGINSCREEN.JS > GOOGLE OAUTH > RESULT.USER | ',
+          result.user
+        );
+        props.navigation.navigate('Atlas', {
           username: result.user.givenName,
         }); //after Google login redirect to Atlas
         return result.accessToken;
@@ -52,7 +61,6 @@ function LoginScreen(props) {
           }}
         />
       </TouchableHighlight>
-      {/* <Button title="Login with Google" onPress={signInWithGoogle} /> */}
     </View>
   );
 }
