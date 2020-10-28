@@ -94,8 +94,16 @@ function HomeScreen(props) {
         }}
         onRegionChangeComplete={(region) => setRegion(region)}
     >
-
-<View>
+      {markerList.map(marker => (
+        <Marker
+          coordinate={marker.coordinate}
+          title={marker.title}
+          description={marker.description}
+          pinColor={marker.pinColor}
+        />
+      ))}
+      <View style={styles.container}>
+        <View>
           <TouchableOpacity 
               style={styles.addPinButton}
               onPress={() => {
@@ -108,16 +116,6 @@ function HomeScreen(props) {
               </TouchableOpacity>
           {/* <Text>Your location: {JSON.stringify(location.longitude)}, {JSON.stringify(location.latitude)}</Text> */}
         </View>
-      {markerList.map(marker => (
-        <Marker
-          coordinate={marker.coordinate}
-          title={marker.title}
-          description={marker.description}
-          pinColor={marker.pinColor}
-        />
-      ))}
-      <View style={styles.container}>
-        
       </View>
     </MapView>
   );
@@ -137,10 +135,10 @@ const styles = StyleSheet.create({
   },
   addPinButton: {
     backgroundColor: 'white',
-    width: '40%', 
-    height: '35%',
-    marginBottom: '20%',
-    marginLeft: '30%',
+    // width: '40%', 
+    // height: '35%',
+    // marginBottom: '20%',
+    // marginLeft: '30%',
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 10,
