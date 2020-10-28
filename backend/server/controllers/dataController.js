@@ -18,18 +18,18 @@ module.exports = {
 		});
 	},
 
-	// getEventsByTime: (req, res, next) => {
-	//     QUERYSTRING = ``;
-	//     VALUES = [];
+	getMarkers: (req, res, next) => {
+	    QUERYSTRING = `SELECT * FROM events`;
+	    VALUES = [];
 
-	//     db.query(QUERYSTRING, VALUES, (err, response) => {
-	//         if (err) return next(err);
-	//         else {
-	//             res.locals.messages = response.rows;
-	//             return next();
-	//         }
-	//     })
-	// },
+	    db.query(QUERYSTRING, VALUES, (err, response) => {
+	        if (err) return next(err);
+	        else {
+	            res.locals.markers = response.rows;
+	            return next();
+	        }
+	    })
+	},
 
 	// getAllEvents: (req, res, next) => {
 	//     QUERYSTRING = ``;

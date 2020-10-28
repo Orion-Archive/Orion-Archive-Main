@@ -6,6 +6,11 @@ const controller = require('./controllers/dataController')
 
 app.use(express.json());
 
+app.use("/getMarkers", controller.getMarkers, (req, res) => {
+	console.log("getMarkers route after middleware");
+	res.status(200).json(res.locals.markers)
+});
+
 app.use("/newMarker", controller.putMarker, (req, res) => {
 	console.log("newMarker route after middleware");
 	res.status(200).json(res.locals.insertedEvent)
@@ -13,6 +18,7 @@ app.use("/newMarker", controller.putMarker, (req, res) => {
 
 app.get("/", (req, res) => {
 	console.log("Main route");
+	res.status(200).json('Hello!');
 });
 
 // global error handler
