@@ -115,7 +115,7 @@ function HomeScreen(props) {
         <TouchableOpacity
           style={styles.addPinButton}
           onPress={() => {
-            addNewPin();
+            // addNewPin();
             console.log(markerList);
             // dispatch({
             // type: "addPin",
@@ -128,8 +128,7 @@ function HomeScreen(props) {
               description: `Here lies a park.2`,
               pinColor: 'red',
             };
-            functions.postMarker(newPin);
-            setMarkerList([...markerList, newPin]);
+            functions.postMarker(newPin).then((returnedPin)=> setMarkerList([...markerList, returnedPin]);
             // })
             console.log(markerList);
           }}
