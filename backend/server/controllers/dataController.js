@@ -1,15 +1,17 @@
 const db = require("../models/mapDataModel.js");
 
 module.exports = {
-	postEvent: (req, res, next) => {
-		QUERYSTRING = ``;
-		VALUES = [message, password];
+	putMarker: (req, res, next) => {
+		const { eventName, latitude, longitude, eventDescription } = req.body;
+
+		QUERYSTRING = `INSERT INTO events (event_name, event_description, latitude, longitude, time) VALUES ($1, $2, $3, $4, now()) RETURNING *;`;
+		VALUES = [eventName, latitude, longitude, eventDescription];
 
 		db.query(QUERYSTRING, VALUES, (err, response) => {
 			if (err) return next(err);
 			else {
 				console.log("Response from INSERT: ", response.rows[0]);
-				res.locals.response = response.rows[0];
+				res.locals.insertedEvent = response.rows[0];
 				return next();
 			}
 		});

@@ -2,6 +2,7 @@ import React, { useState, useReducer, useEffect } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
+const functions = require('../functions')
 
 function HomeScreen(props) {
   const [region, setRegion] = useState({
@@ -120,6 +121,7 @@ function HomeScreen(props) {
               description:`Here lies a park.2`,
               pinColor:'red'
             } 
+            functions.postMarker(newPin)
             setMarkerList([...markerList, newPin])
             // })
             console.log(markerList)
