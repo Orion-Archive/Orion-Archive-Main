@@ -1,4 +1,4 @@
-import { PG_URI } from '@env';
+const PG_URI  = `postgres://ayovbbcq:OwwUoR79RTyNzEG9hIHpH_apreH5KLfL@lallah.db.elephantsql.com:5432/ayovbbcq`
 
 const { Pool } = require('pg');
 
