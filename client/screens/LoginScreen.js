@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableHighlight,
+  ImageBackground,
 } from 'react-native';
 import * as Google from 'expo-google-app-auth';
 
@@ -39,45 +40,58 @@ function LoginScreen(props) {
   };
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={{
-          width: 200,
-          height: 180,
-          uri:
-            'https://upload.wikimedia.org/wikipedia/commons/e/e0/Orion_logo.png',
-        }}
-      />
-      <Text style={styles.title}>Orion Archive</Text>
-      <Text style={styles.signin}>Sign In</Text>
-      <TouchableHighlight onPress={signInWithGoogle}>
+    <ImageBackground
+      style={styles.background}
+      source={{
+        uri: 'https://cdn.astrobin.com/thumbs/b_dwteD2ndt-_1824x0_54Ku8TbQ.jpg',
+      }}
+    >
+      <View style={styles.logoContainer}>
         <Image
+          style={styles.logo}
           source={{
-            width: 382,
-            height: 92,
+            width: 200,
+            height: 180,
             uri:
-              'https://github.com/react-native-google-signin/google-signin/blob/master/img/signin-button.png?raw=true',
+              'https://upload.wikimedia.org/wikipedia/commons/e/e0/Orion_logo.png',
           }}
         />
-      </TouchableHighlight>
-    </View>
+        <Text style={styles.title}>Orion Archive</Text>
+        <TouchableHighlight onPress={signInWithGoogle}>
+          <Image
+            style={styles.signin}
+            source={require('../assets/google-oauth-signin.png')}
+            resizeMode="contain"
+          />
+        </TouchableHighlight>
+      </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    // FLEX: WILL GROW VERTICALLY AND HORIZONTALLY TO TAKE UP FULL SCREEN
+  background: {
     flex: 1,
+    height: '105%',
+    top: -5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  logoContainer: {
+    position: 'absolute',
+    top: '35%',
+    alignItems: 'center',
   },
   title: {
     fontSize: 35,
   },
   signin: {
-    fontSize: 35,
+    width: 250,
   },
 });
 
