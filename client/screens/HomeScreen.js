@@ -4,8 +4,8 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
 function HomeScreen(props) {
   const [region, setRegion] = useState({
-      latitude: 37.78825,
-      longitude: -122.4324,
+      latitude: 52.5200066, 
+      longitude: 13.404954,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     })
@@ -33,7 +33,13 @@ function HomeScreen(props) {
         style={{ flex: 1 }}
         provider={PROVIDER_GOOGLE}
         showsUserLocation
-        region={region}
+        initialRegion={{
+          latitude: 52.5200066, 
+          longitude: 13.404954,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+        // region={region}
         onRegionChangeComplete={(region) => setRegion(region)}
     >
       {markerList.map(marker => (
@@ -44,7 +50,18 @@ function HomeScreen(props) {
           pinColor={marker.pinColor}
         />
       ))}
-      <View style={{position: "absolute", bottom: 50}}/>
+      
+      <View
+        style={{
+          flexDirection: "row",
+          height: 100,
+          padding: 20,
+          backgroundColor: 'white'
+        }}
+      >
+        <Text>{region.latitude} , {region.longitude}</Text>
+      </View>
+
       <Button onPress={() => dispatch({ 
         type: "addPin", 
         value: {
