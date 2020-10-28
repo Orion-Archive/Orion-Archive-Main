@@ -9,7 +9,7 @@ import {
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import colors from '../config/colors';
 import * as Location from 'expo-location';
-const functions = require('../functions')
+const functions = require('../functions');
 
 function HomeScreen(props) {
   const [region, setRegion] = useState({
@@ -128,8 +128,11 @@ function HomeScreen(props) {
               description: `Here lies a park.2`,
               pinColor: 'red',
             };
-            functions.postMarker(newPin).then((returnedPin)=> setMarkerList([...markerList, returnedPin]);
-            // })
+            functions
+              .postMarker(newPin)
+              .then((returnedPin) =>
+                setMarkerList([...markerList, returnedPin])
+              );
             console.log(markerList);
           }}
         >
