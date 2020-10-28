@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 
 class HomeScreen extends Component {
+
 	render() {
 		return (
 			<MapView
@@ -19,5 +20,4 @@ class HomeScreen extends Component {
 		);
 	}
 }
-
 export default HomeScreen;
