@@ -42,21 +42,14 @@ function LoginScreen(props) {
   return (
     <ImageBackground
       style={styles.background}
-      source={{
-        uri: 'https://cdn.astrobin.com/thumbs/b_dwteD2ndt-_1824x0_54Ku8TbQ.jpg',
-      }}
+      source={require('../assets/login-screen-background.png')}
     >
       <View style={styles.logoContainer}>
         <Image
           style={styles.logo}
-          source={{
-            width: 200,
-            height: 180,
-            uri:
-              'https://upload.wikimedia.org/wikipedia/commons/e/e0/Orion_logo.png',
-          }}
+          source={require('../assets/orion-archive-logo.png')}
+          resizeMode="contain"
         />
-        <Text style={styles.title}>Orion Archive</Text>
         <TouchableHighlight onPress={signInWithGoogle}>
           <Image
             style={styles.signin}
@@ -82,9 +75,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  logo: {
+    width: 300,
+  },
   logoContainer: {
-    position: 'absolute',
-    top: '35%',
     alignItems: 'center',
   },
   title: {
