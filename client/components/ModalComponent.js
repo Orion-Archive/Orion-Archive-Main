@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import colors from '../config/colors';
 import {
   Alert,
   Modal,
@@ -20,24 +21,26 @@ function ModalComponent(props) {
         visible={true}
       >
         <View style={styles.modalView}>
-          <TouchableHighlight
-            style={{ ...styles.openButton, backgroundColor: '#2196F3' }}
-            onPress={() => {
-              /* setModalVisible(!modalVisible); */
-              setModalVisible(false);
-            }}
-          >
-            <Text style={styles.textStyle}>VIEW</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={{ ...styles.openButton, backgroundColor: '#2196F3' }}
-            onPress={() => {
-              /* setModalVisible(!modalVisible); */
-              setModalVisible(false);
-            }}
-          >
-            <Text style={styles.textStyle}>X</Text>
-          </TouchableHighlight>
+          <View style={styles.modalNav}>
+            <TouchableHighlight
+              style={styles.addButton}
+              onPress={() => {
+                /* setModalVisible(!modalVisible); */
+                setModalVisible(false);
+              }}
+            >
+              <Text style={styles.addButtonText}> + </Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+              style={styles.closingButton}
+              onPress={() => {
+                /* setModalVisible(!modalVisible); */
+                setModalVisible(false);
+              }}
+            >
+              <Text style={styles.closingButtonText}>X</Text>
+            </TouchableHighlight>
+          </View>
           <ScrollView
             style={styles.ScrollView}
             showsVerticalScrollIndicator={false}
@@ -93,7 +96,7 @@ function ModalComponent(props) {
           setModalVisible(true);
         }}
       >
-        <Text style={styles.textStyle}>Show Modal</Text>
+        <Text>Show Modal</Text>
       </TouchableHighlight>
     </View>
   );
@@ -110,12 +113,11 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 50,
     margin: 20,
-    backgroundColor: 'yellow',
+    backgroundColor: colors.backgroundColor,
     borderRadius: 20,
     padding: 20,
-    justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -124,12 +126,37 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-  modalNav: {},
+  modalNav: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   openButton: {
-    backgroundColor: '#F194FF',
+    backgroundColor: colors.primary,
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+  },
+  closingButton: {
+    backgroundColor: colors.white,
+    padding: 10,
+    elevation: 2,
+  },
+  closingButtonText: {
+    color: colors.backgroundColor,
+    fontWeight: '900',
+    fontSize: 16,
+  },
+  addButton: {
+    backgroundColor: colors.white,
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  addButtonText: {
+    color: colors.backgroundColor,
+    fontWeight: '900',
+    fontSize: 20,
   },
   ScrollView: {
     height: '100%',
@@ -137,14 +164,10 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     marginHorizontal: 15,
   },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
   modalText: {
     marginBottom: 35,
     textAlign: 'left',
+    color: colors.white,
   },
 });
 
