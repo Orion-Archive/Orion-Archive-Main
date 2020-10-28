@@ -1,16 +1,23 @@
 import React, { useState, useReducer, useEffect } from 'react';
-import { Platform, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import colors from '../config/colors';
 import * as Location from 'expo-location';
 const functions = require('../functions')
 
 function HomeScreen(props) {
   const [region, setRegion] = useState({
-      latitude: 52.5200066, 
-      longitude: 13.404954,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    })
+    latitude: 52.5200066,
+    longitude: 13.404954,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
 
   // const [markerList, dispatch] = useReducer((markerList, { type, newPin }) => {
   //     switch (type) {
@@ -30,18 +37,18 @@ function HomeScreen(props) {
 
   const [markerList, setMarkerList] = useState([
     {
-      coordinate:{ latitude: 52.5200066, longitude: 13.404954 },
-      title:`LAFE`,
-      description:`Here lies a park.`,
-      pinColor:'green'
-    }
+      coordinate: { latitude: 52.5200066, longitude: 13.404954 },
+      title: `LAFE`,
+      description: `Here lies a park.`,
+      pinColor: 'green',
+    },
   ]);
 
   const [location, setLocation] = useState({
     latitude: 0,
     longitude: 0,
     latitudeDelta: 5,
-    longitudeDelta: 5
+    longitudeDelta: 5,
   });
   const [errorMsg, setErrorMsg] = useState(null);
 
@@ -57,8 +64,8 @@ function HomeScreen(props) {
         latitude: parseFloat(location.coords.latitude),
         longitude: parseFloat(location.coords.longitude),
         latitudeDelta: 5,
-        longitudeDelta: 5
-    });
+        longitudeDelta: 5,
+      });
     })();
   }, []);
 
@@ -74,103 +81,72 @@ function HomeScreen(props) {
 
   const addNewPin = () => {
     const newPin = {
-      coordinate:{ latitude: region.latitude, longitude: region.longitude },
-      title:`LAFE2`,
-      description:`Here lies a park.2`,
-      pinColor:'red'
-    } 
-    setMarkerList([...markerList, newPin])
-  }
-  
+      coordinate: { latitude: region.latitude, longitude: region.longitude },
+      title: `LAFE2`,
+      description: `Here lies a park.2`,
+      pinColor: 'red',
+    };
+    setMarkerList([...markerList, newPin]);
+  };
+
   return (
-    <MapView
-        style={{ flex: 1 }}
+    <View style={styles.container}>
+      <MapView
+        style={styles.mapStyle}
         provider={PROVIDER_GOOGLE}
         showsUserLocation={true}
         initialRegion={{
-          latitude: 52.5200066, 
+          latitude: 52.5200066,
           longitude: 13.404954,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-        onRegionChangeComplete={(region) => setRegion(region)}
-    >
-      {markerList.map(marker => (
-        <Marker
-          coordinate={marker.coordinate}
-          title={marker.title}
-          description={marker.description}
-          pinColor={marker.pinColor}
-        />
-      ))}
-      <View style={styles.container}>
-        <View>
-          <TouchableOpacity 
-              style={styles.addPinButton}
-              onPress={() => {
-                const newPin = {
-                  coordinate:{ latitude: region.latitude, longitude: region.longitude },
-                  title:`LAFE2`,
-                  description:`Here lies a park.2`,
-                  pinColor:'red'
-                } 
-                functions.postMarker(newPin).then((returnedPin) => returnedPin? setMarkerList([...markerList, returnedPin]) : alert('Error'));
-                
-                console.log(markerList)
-                }
-              }
-              >
-              <Text style={styles.buttonText}>Add Pin</Text>
-              </TouchableOpacity>
-          {/* <Text>Your location: {JSON.stringify(location.longitude)}, {JSON.stringify(location.latitude)}</Text> */}
-        </View>
-
-        {/* <Button 
+      >
+        {markerList.map((marker) => (
+          <Marker
+            coordinate={marker.coordinate}
+            title={marker.title}
+            description={marker.description}
+            pinColor={marker.pinColor}
+          />
+        ))}
+      </MapView>
+      <View>
+        <TouchableOpacity
+          style={styles.addPinButton}
           onPress={() => {
-            console.log(markerList)
-            // dispatch({ 
-            // type: "addPin", 
-            
-            }
-          }
-          title="Add Pin"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-          style={{backgroundColor: "white", width: '2em', height: '1em'}}
-        /> */}
-
+            addNewPin();
+            console.log(markerList);
+          }}
+        >
+          <Text style={styles.addPinButtonText}>Add Pin</Text>
+        </TouchableOpacity>
       </View>
-    </MapView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    // flexDirection: "column",
     flex: 1,
-    justifyContent: 'flex-end',
-    bottom: 0,
-    height: 150,
-    width: '100%',
-    padding: 20,
-    backgroundColor: 'purple',
-    position: "absolute",
+    backgroundColor: colors.backgroundColor,
+  },
+  mapStyle: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height - 200,
   },
   addPinButton: {
-    backgroundColor: 'white',
-    // width: '40%', 
-    // height: '35%',
-    // marginBottom: '20%',
-    // marginLeft: '30%',
-    borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    elevation: 8,
-    // position: 'relative',
-  },
-  buttonText: {
-    color: 'black',
     alignSelf: 'center',
-  }
-})
+    backgroundColor: colors.primary,
+    width: '40%',
+    borderRadius: 10,
+    paddingVertical: 15,
+    top: 70,
+  },
+  addPinButtonText: {
+    textAlign: 'center',
+    color: colors.backgroundColor,
+  },
+});
+
 export default HomeScreen;

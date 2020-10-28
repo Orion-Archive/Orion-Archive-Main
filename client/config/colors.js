@@ -4,4 +4,5 @@ export default {
   black: '#000',
   white: '#fff',
   backgroundColor: '#240742',
+  transparent: 'rgba(52, 52, 52, 0.0)',
 };
