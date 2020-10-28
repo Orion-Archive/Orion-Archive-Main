@@ -40,7 +40,7 @@ module.exports = {
       })
     }
   },
-  
+
   getMarkers: function () {
     console.log("Getting markers...");
     return fetch('http://192.168.0.8:3333/getMarkers')
@@ -48,12 +48,6 @@ module.exports = {
         .then((data) => {
           console.log(data);
           // this is where we update state, so we need to return the right type of object to send to setMarkerList
-          return {
-              coordinate:{ latitude: data.latitude, longitude: data.longitude },
-              title: data.eventName,
-              description: data.eventDescription,
-              pinColor:'green'
-          }
         })
         .catch((err) => console.log(err));
   }

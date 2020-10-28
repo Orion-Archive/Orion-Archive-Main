@@ -4,8 +4,8 @@ import HomeScreen from './client/screens/HomeScreen';
 import ModalComponent from './client/components/ModalComponent';
 
 const MainNavigator = createSwitchNavigator({
-  LoginScreen: { screen: LoginScreen },
   Atlas: { screen: HomeScreen },
+  LoginScreen: { screen: LoginScreen },
 });
 
 const App = createAppContainer(MainNavigator);
