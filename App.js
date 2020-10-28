@@ -5,9 +5,7 @@ import HomeScreen from './client/screens/HomeScreen';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <HomeScreen />
-    </View>
+    <HomeScreen />
   );
 }
 
