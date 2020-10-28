@@ -9,6 +9,7 @@ import {
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import colors from '../config/colors';
 import * as Location from 'expo-location';
+const functions = require('../functions')
 
 function HomeScreen(props) {
   const [region, setRegion] = useState({
