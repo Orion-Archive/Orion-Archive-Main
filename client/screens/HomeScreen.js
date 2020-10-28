@@ -50,31 +50,37 @@ function HomeScreen(props) {
           pinColor={marker.pinColor}
         />
       ))}
-      
       <View
         style={{
-          flexDirection: "row",
-          height: 100,
-          padding: 20,
-          backgroundColor: 'white'
-        }}
-      >
-        <Text>{region.latitude} , {region.longitude}</Text>
-      </View>
+          flexDirection: "column",
+        }}>
+        <View
+          style={{
+            height: 60,
+            padding: 20,
+            backgroundColor: 'white'
+          }}
+        >
+          <Text>{region.latitude} , {region.longitude}</Text>
+        </View>
 
-      <Button onPress={() => dispatch({ 
-        type: "addPin", 
-        value: {
-          coordinate:{ latitude: region.latitude, longitude: region.longitude },
-          title:`LAFE`,
-          description:`Here lies a park.`,
-          pinColor:'green'
-        } 
-      })}
-        title="Learn More"
-        color="#841584"
-        accessibilityLabel="Learn more about this purple button"
-        style={{position: `absolute`, bottom: 30, backgroundColor: "white", width: '2em', height: '1em'}}/>
+        <Button 
+          onPress={() => dispatch({ 
+            type: "addPin", 
+            value: {
+              coordinate:{ latitude: region.latitude, longitude: region.longitude },
+              title:`LAFE`,
+              description:`Here lies a park.`,
+              pinColor:'green'
+            } 
+            })}
+          title="Learn More"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+          style={{backgroundColor: "white", width: '2em', height: '1em'}}
+        />
+
+      </View>
       
     </MapView>
   );
