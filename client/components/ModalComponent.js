@@ -21,26 +21,7 @@ function ModalComponent(props) {
         visible={true}
       >
         <View style={styles.modalView}>
-          <View style={styles.modalNav}>
-            <TouchableHighlight
-              style={styles.addButton}
-              onPress={() => {
-                /* setModalVisible(!modalVisible); */
-                setModalVisible(false);
-              }}
-            >
-              <Text style={styles.addButtonText}> + </Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.closingButton}
-              onPress={() => {
-                /* setModalVisible(!modalVisible); */
-                setModalVisible(false);
-              }}
-            >
-              <Text style={styles.closingButtonText}>X</Text>
-            </TouchableHighlight>
-          </View>
+          <Text style={styles.modalHeader}>EVENTS</Text>
           <ScrollView
             style={styles.ScrollView}
             showsVerticalScrollIndicator={false}
@@ -87,6 +68,33 @@ function ModalComponent(props) {
               asdasdasfasfasfa asdasdasfasfasfasfasf asdasdasfasfasfasfasffa sfa
             </Text>
           </ScrollView>
+          <View style={styles.modalNav}>
+            <View style={{ flex: 1 }}>
+              <TouchableHighlight
+                style={styles.addButton}
+                onPress={() => {
+                  /* setModalVisible(!modalVisible); */
+                  setModalVisible(false);
+                }}
+              >
+                <Text style={styles.addButtonText} resizeMode="contain">
+                  {' '}
+                  +{' '}
+                </Text>
+              </TouchableHighlight>
+            </View>
+            <View style={{ flex: 1 }}>
+              <TouchableHighlight
+                style={styles.closingButton}
+                onPress={() => {
+                  /* setModalVisible(!modalVisible); */
+                  setModalVisible(false);
+                }}
+              >
+                <Text style={styles.closingButtonText}>X</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
         </View>
       </Modal>
 
@@ -127,9 +135,15 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalNav: {
+    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+  },
+  modalHeader: {
+    color: colors.secondary,
+    fontSize: 75,
+    fontWeight: '900',
   },
   openButton: {
     backgroundColor: colors.primary,
@@ -138,25 +152,32 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   closingButton: {
-    backgroundColor: colors.white,
-    padding: 10,
+    backgroundColor: colors.backgroundColor,
+    borderWidth: 2,
+    borderColor: colors.primary,
+    borderRadius: 20,
+    padding: 12,
+    marginLeft: 5,
     elevation: 2,
   },
   closingButtonText: {
-    color: colors.backgroundColor,
+    color: colors.primary,
     fontWeight: '900',
     fontSize: 16,
+    textAlign: 'center',
   },
   addButton: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.primary,
     borderRadius: 20,
     padding: 10,
+    marginRight: 5,
     elevation: 2,
   },
   addButtonText: {
     color: colors.backgroundColor,
     fontWeight: '900',
     fontSize: 20,
+    textAlign: 'center',
   },
   ScrollView: {
     height: '100%',
