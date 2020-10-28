@@ -1,6 +1,7 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import * as Location from 'expo-location';
 
 function HomeScreen(props) {
   const [region, setRegion] = useState({
@@ -27,12 +28,47 @@ function HomeScreen(props) {
     }]);
 
   const [newPinInput, setNewPinInput] = useState('');
+  const [location, setLocation] = useState({
+    latitude: 0,
+    longitude: 0,
+    latitudeDelta: 5,
+    longitudeDelta: 5
+  });
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation({
+        latitude: parseFloat(location.coords.latitude),
+        longitude: parseFloat(location.coords.longitude),
+        latitudeDelta: 5,
+        longitudeDelta: 5
+    });
+    })();
+  }, []);
+
+  /*
+    var mapRef;
+    const goToInitialLocation = () => {
+    let initialRegion = Object.assign({}, location);
+    initialRegion["latitudeDelta"] = 0.005;
+    initialRegion["longitudeDelta"] = 0.005;
+    mapRef.current.getMapRef().animateToRegion(initialRegion, 2000);
+  }
+  */
   
   return (
     <MapView
         style={{ flex: 1 }}
         provider={PROVIDER_GOOGLE}
-        showsUserLocation
+        // ref={mapRef}
+        showsUserLocation={true}
         initialRegion={{
           latitude: 52.5200066, 
           longitude: 13.404954,
@@ -61,7 +97,8 @@ function HomeScreen(props) {
             backgroundColor: 'white'
           }}
         >
-          <Text>{region.latitude} , {region.longitude}</Text>
+          {/* <Text>{region.latitude} , {region.longitude}</Text> */}
+          <Text>Your location: {JSON.stringify(location.longitude)}, {JSON.stringify(location.latitude)}</Text>
         </View>
 
         <Button 
