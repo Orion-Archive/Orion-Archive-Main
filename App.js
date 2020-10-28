@@ -1,19 +1,18 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import LoginScreen from './client/screens/LoginScreen';
-import HomeScreen from './client/screens/HomeScreen';
 
-export default function App() {
-  return (
-    <HomeScreen />
-  );
-}
+import React from "react";
+import LoginScreen from "./client/screens/LoginScreen";
+import HomeScreen from "./client/screens/HomeScreen";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+// export default function App() {
+// 	return <LoginScreen />;
+// }
+
+const MainNavigator = createSwitchNavigator({
+	Login: { screen: LoginScreen },
+	Atlas: { screen: HomeScreen },
 });
+
+const App = createAppContainer(MainNavigator);
+
+export default App;
