@@ -26,7 +26,7 @@ function ModalComponent(props) {
             style={styles.ScrollView}
             showsVerticalScrollIndicator={false}
           >
-            {/* POPULATE <TEXT> WITH OUR EVENTS FROM THE DB USING GET REQUEST */}
+            {/* NEED TO REPLACE THIS HARD CODED TEXT - POPULATE <TEXT> WITH OUR EVENTS FROM THE DB USING GET REQUEST */}
             <Text style={styles.modalText}>
               Hello World! shadowOffsetsdf sd // $FlowFixMesd // $$FlowFixMesd
               gfs dg dry asdasdasfasfasfa asdasdasfasfasfasfasf
@@ -98,6 +98,7 @@ function ModalComponent(props) {
         </View>
       </Modal>
 
+      {/* NEED TO UPDATE THIS - THIS BUTTON TRIGGERS THE MODAL TO OPEN */}
       <TouchableHighlight
         style={styles.openButton}
         onPress={() => {
