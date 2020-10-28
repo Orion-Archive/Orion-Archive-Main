@@ -2,6 +2,7 @@ import React, { useState, useReducer, useEffect } from 'react';
 import { Platform, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
+const functions = require('../functions')
 
 function HomeScreen(props) {
   const [region, setRegion] = useState({
@@ -107,7 +108,14 @@ function HomeScreen(props) {
           <TouchableOpacity 
               style={styles.addPinButton}
               onPress={() => {
-                addNewPin()
+                const newPin = {
+                  coordinate:{ latitude: region.latitude, longitude: region.longitude },
+                  title:`LAFE2`,
+                  description:`Here lies a park.2`,
+                  pinColor:'red'
+                } 
+                functions.postMarker(newPin).then((returnedPin) => returnedPin? setMarkerList([...markerList, returnedPin]) : alert('Error'));
+                
                 console.log(markerList)
                 }
               }
@@ -116,6 +124,21 @@ function HomeScreen(props) {
               </TouchableOpacity>
           {/* <Text>Your location: {JSON.stringify(location.longitude)}, {JSON.stringify(location.latitude)}</Text> */}
         </View>
+
+        {/* <Button 
+          onPress={() => {
+            console.log(markerList)
+            // dispatch({ 
+            // type: "addPin", 
+            
+            }
+          }
+          title="Add Pin"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+          style={{backgroundColor: "white", width: '2em', height: '1em'}}
+        /> */}
+
       </View>
     </MapView>
   );
