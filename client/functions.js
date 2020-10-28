@@ -8,6 +8,7 @@ module.exports = {
     // const userId = document.getElementById('desc').value;
     
     if (eventName && eventDescription){
+      console.log("Event Name: ", eventName, " Description: ", eventDescription)
       return fetch('http://192.168.0.8:3333/')
           .then((res) => res.json())
           .then((data) => {
