@@ -44,38 +44,22 @@ function HomeScreen(props) {
           pinColor={marker.pinColor}
         />
       ))}
-      
-        <Button onPress={() => dispatch({ 
-          type: "addPin", 
-          value: {
-            coordinate:{ latitude: region.latitude, longitude: region.longitude },
-            title:`LAFE`,
-            description:`Here lies a park.`,
-            pinColor:'green'
-          } 
-        })}
-          title="Learn More"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"/>
+      <View style={{position: "absolute", bottom: 50}}/>
+      <Button onPress={() => dispatch({ 
+        type: "addPin", 
+        value: {
+          coordinate:{ latitude: region.latitude, longitude: region.longitude },
+          title:`LAFE`,
+          description:`Here lies a park.`,
+          pinColor:'green'
+        } 
+      })}
+        title="Learn More"
+        color="#841584"
+        accessibilityLabel="Learn more about this purple button"
+        style={{position: `absolute`, bottom: 30, backgroundColor: "white", width: '2em', height: '1em'}}/>
       
     </MapView>
   );
-}
-
-	render() {
-		return (
-			<MapView
-				style={{ flex: 1 }}
-				provider={PROVIDER_GOOGLE}
-				showsUserLocation
-				initialRegion={{
-					latitude: 37.78825,
-					longitude: -122.4324,
-					latitudeDelta: 0.0922,
-					longitudeDelta: 0.0421,
-				}}
-			/>
-		);
-	}
 }
 export default HomeScreen;
