@@ -121,9 +121,8 @@ function HomeScreen(props) {
               description:`Here lies a park.2`,
               pinColor:'red'
             } 
-            functions.postMarker(newPin)
-            setMarkerList([...markerList, newPin])
-            // })
+            functions.postMarker(newPin).then((returnedPin) => returnedPin? setMarkerList([...markerList, returnedPin]) : alert('Error'));
+            
             console.log(markerList)
             }
           }
