@@ -1,9 +1,10 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import LoginScreen from './client/screens/LoginScreen';
 import HomeScreen from './client/screens/HomeScreen';
+import ModalComponent from './client/components/ModalComponent';
 
 const MainNavigator = createSwitchNavigator({
-  Login: { screen: LoginScreen },
+  LoginScreen: { screen: LoginScreen },
   Atlas: { screen: HomeScreen },
 });
 
