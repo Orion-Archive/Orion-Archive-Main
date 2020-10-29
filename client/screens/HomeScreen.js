@@ -12,7 +12,7 @@ import * as Location from 'expo-location';
 const functions = require('../functions');
 
 function HomeScreen(props) {
-  const [region, setRegion] = useState({
+  const [currentLocation, setCurrentLocation] = useState({
     latitude: 52.5200066,
     longitude: 13.404954,
     latitudeDelta: 0.0922,
@@ -79,15 +79,15 @@ function HomeScreen(props) {
   }
   */
 
-  const addNewPin = () => {
-    const newPin = {
-      coordinate: { latitude: region.latitude, longitude: region.longitude },
-      title: `LAFE2`,
-      description: `Here lies a park.2`,
-      pinColor: 'red',
-    };
-    setMarkerList([...markerList, newPin]);
-  };
+  // const addNewPin = () => {
+  //   const newPin = {
+  //     coordinate: { latitude: region.latitude, longitude: region.longitude },
+  //     title: `LAFE2`,
+  //     description: `Here lies a park.2`,
+  //     pinColor: 'red',
+  //   };
+  //   setMarkerList([...markerList, newPin]);
+  // };
 
   return (
     <View style={styles.container}>
@@ -100,6 +100,10 @@ function HomeScreen(props) {
           longitude: 13.404954,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
+        }}
+        onRegionChangeComplete={(region) => {
+          console.log('this is region!', region)
+          setCurrentLocation(region)
         }}
       >
         {markerList.map((marker) => (
@@ -116,13 +120,13 @@ function HomeScreen(props) {
           style={styles.addPinButton}
           onPress={() => {
             // addNewPin();
-            console.log(markerList);
+            // console.log(markerList);
             // dispatch({
             // type: "addPin",
             const newPin = {
               coordinate: {
-                latitude: region.latitude,
-                longitude: region.longitude,
+                latitude: currentLocation.latitude,
+                longitude: currentLocation.longitude,
               },
               title: `LAFE2`,
               description: `Here lies a park.2`,
@@ -130,10 +134,13 @@ function HomeScreen(props) {
             };
             functions
               .postMarker(newPin)
-              .then((returnedPin) =>
+              .then((returnedPin) => {
+                // console.log('this is the returnedPin:', returnedPin)
                 setMarkerList([...markerList, returnedPin])
-              );
-            console.log(markerList);
+              })
+              .then(() => {
+                // console.log(markerList);
+              })
           }}
         >
           <Text style={styles.addPinButtonText}>Add Pin</Text>
