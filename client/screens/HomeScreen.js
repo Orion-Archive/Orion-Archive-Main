@@ -1,4 +1,10 @@
-import React, { useState, useReducer, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useReducer,
+  useEffect,
+  useRef,
+  useLayoutEffect,
+} from 'react';
 import {
   StyleSheet,
   Text,
@@ -71,42 +77,45 @@ function HomeScreen(props) {
 
   const addingMarkertoMarkerList = (newMarker) => {
     setMarkerList([...markerList, newMarker]);
-	};
-	
-	// add all pin locations from database onto map upon initial render
-	useEffect(() => {
-		(async () => {
-			const initialMarkerList = await functions.getMarkers();
-			setMarkerList(initialMarkerList);
-		})();
-	});
+  };
 
+  // useLayoutEffect
+  // add all pin locations from database onto map upon initial render
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-      }
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation({
-        latitude: parseFloat(location.coords.latitude),
-        longitude: parseFloat(location.coords.longitude),
-        latitudeDelta: 5,
-        longitudeDelta: 5,
-      });
+      const initialMarkerList = await functions.getMarkers();
+      console.log('INITIALMARKERLIST: ', initialMarkerList);
+      setMarkerList(initialMarkerList);
+      console.log('MARKERLIST USEEFFECT: ', markerList);
     })();
   }, []);
 
-	const mapRef = useRef();
-	const animateToRegion = () => {
-		let region = {
-			latitude: location.latitude,
-			longitude: location.longitude,
-			latitudeDelta: 0.005,
-			longitudeDelta: 0.005,
-		};
-		mapRef.current.animateToRegion(region, 1000);
-	};
+  // useEffect(() => {
+  //   (async () => {
+  //     let { status } = await Location.requestPermissionsAsync();
+  //     if (status !== 'granted') {
+  //       setErrorMsg('Permission to access location was denied');
+  //     }
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLocation({
+  //       latitude: parseFloat(location.coords.latitude),
+  //       longitude: parseFloat(location.coords.longitude),
+  //       latitudeDelta: 5,
+  //       longitudeDelta: 5,
+  //     });
+  //   })();
+  // }, []);
+
+  const mapRef = useRef();
+  const animateToRegion = () => {
+    let region = {
+      latitude: location.latitude,
+      longitude: location.longitude,
+      latitudeDelta: 0.005,
+      longitudeDelta: 0.005,
+    };
+    mapRef.current.animateToRegion(region, 1000);
+  };
 
   return (
     <ImageBackground
@@ -115,7 +124,7 @@ function HomeScreen(props) {
       resizeMode="contain"
     >
       <MapView
-			ref={mapRef}
+        ref={mapRef}
         style={styles.mapStyle}
         provider={PROVIDER_GOOGLE}
         showsUserLocation={true}
@@ -126,7 +135,11 @@ function HomeScreen(props) {
           longitudeDelta: 0.0421,
         }}
         onRegionChangeComplete={(region) => {
-					console.log(location.longitude, location.latitude);
+          console.log(
+            'CURRENT LOCATION: ',
+            location.longitude,
+            location.latitude
+          );
           setCurrentLocation(region);
         }}
       >
@@ -189,6 +202,7 @@ const styles = StyleSheet.create({
     color: colors.backgroundColor,
     fontWeight: '900',
     fontSize: 20,
-	},
+  },
+});
 
 export default HomeScreen;
