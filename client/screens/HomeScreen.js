@@ -1,18 +1,28 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, {
+  useState,
+  useReducer,
+  useEffect,
+  useRef,
+  useLayoutEffect,
+} from 'react';
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   Dimensions,
+  ImageBackground,
 } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import colors from '../config/colors';
 import * as Location from 'expo-location';
+import InputModalComponent from '../components/InputModalComponent';
+import DisplayModalComponent from '../components/DisplayModalComponent';
+
 const functions = require('../functions');
 
 function HomeScreen(props) {
-  const [region, setRegion] = useState({
+  const [currentLocation, setCurrentLocation] = useState({
     latitude: 52.5200066,
     longitude: 13.404954,
     latitudeDelta: 0.0922,
@@ -50,48 +60,71 @@ function HomeScreen(props) {
     latitudeDelta: 5,
     longitudeDelta: 5,
   });
+
   const [errorMsg, setErrorMsg] = useState(null);
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const [displayVisible, setDisplayVisible] = useState(false);
+
+  const toggleInputModalHandler = () => {
+    setModalVisible(!modalVisible);
+  };
+
+  const toggleDisplayModalHandler = () => {
+    setDisplayVisible(!displayVisible);
+  };
+
+  const addingMarkertoMarkerList = (newMarker) => {
+    setMarkerList([...markerList, newMarker]);
+  };
+
+  // useLayoutEffect
+  // add all pin locations from database onto map upon initial render
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-      }
-
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation({
-        latitude: parseFloat(location.coords.latitude),
-        longitude: parseFloat(location.coords.longitude),
-        latitudeDelta: 5,
-        longitudeDelta: 5,
-      });
+      const initialMarkerList = await functions.getMarkers();
+      console.log('INITIALMARKERLIST: ', initialMarkerList);
+      setMarkerList(initialMarkerList);
+      console.log('MARKERLIST USEEFFECT: ', markerList);
     })();
   }, []);
 
-  /*
-    var mapRef;
-    const goToInitialLocation = () => {
-    let initialRegion = Object.assign({}, location);
-    initialRegion["latitudeDelta"] = 0.005;
-    initialRegion["longitudeDelta"] = 0.005;
-    mapRef.current.getMapRef().animateToRegion(initialRegion, 2000);
-  }
-  */
+  // useEffect(() => {
+  //   (async () => {
+  //     let { status } = await Location.requestPermissionsAsync();
+  //     if (status !== 'granted') {
+  //       setErrorMsg('Permission to access location was denied');
+  //     }
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLocation({
+  //       latitude: parseFloat(location.coords.latitude),
+  //       longitude: parseFloat(location.coords.longitude),
+  //       latitudeDelta: 5,
+  //       longitudeDelta: 5,
+  //     });
+  //   })();
+  // }, []);
 
-  const addNewPin = () => {
-    const newPin = {
-      coordinate: { latitude: region.latitude, longitude: region.longitude },
-      title: `LAFE2`,
-      description: `Here lies a park.2`,
-      pinColor: 'red',
+  const mapRef = useRef();
+  const animateToRegion = () => {
+    let region = {
+      latitude: location.latitude,
+      longitude: location.longitude,
+      latitudeDelta: 0.005,
+      longitudeDelta: 0.005,
     };
-    setMarkerList([...markerList, newPin]);
+    mapRef.current.animateToRegion(region, 1000);
   };
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require('../assets/addpin-background.png')}
+      style={styles.backgroundimage}
+      resizeMode="contain"
+    >
       <MapView
+        ref={mapRef}
         style={styles.mapStyle}
         provider={PROVIDER_GOOGLE}
         showsUserLocation={true}
@@ -101,6 +134,14 @@ function HomeScreen(props) {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
+        onRegionChangeComplete={(region) => {
+          console.log(
+            'CURRENT LOCATION: ',
+            location.longitude,
+            location.latitude
+          );
+          setCurrentLocation(region);
+        }}
       >
         {markerList.map((marker) => (
           <Marker
@@ -108,45 +149,41 @@ function HomeScreen(props) {
             title={marker.title}
             description={marker.description}
             pinColor={marker.pinColor}
+            onPress={toggleDisplayModalHandler}
           />
         ))}
       </MapView>
       <View>
+        <DisplayModalComponent
+          displayVisible={displayVisible}
+          toggleDisplayModalHandler={toggleDisplayModalHandler}
+          toggleInputModalHandler={toggleInputModalHandler}
+        />
+        <InputModalComponent
+          modalVisible={modalVisible}
+          toggleInputModalHandler={toggleInputModalHandler}
+          currentLocation={currentLocation}
+          addingMarkertoMarkerList={addingMarkertoMarkerList}
+        />
+
         <TouchableOpacity
           style={styles.addPinButton}
           onPress={() => {
-            // addNewPin();
-            console.log(markerList);
-            // dispatch({
-            // type: "addPin",
-            const newPin = {
-              coordinate: {
-                latitude: region.latitude,
-                longitude: region.longitude,
-              },
-              title: `LAFE2`,
-              description: `Here lies a park.2`,
-              pinColor: 'red',
-            };
-            functions
-              .postMarker(newPin)
-              .then((returnedPin) =>
-                setMarkerList([...markerList, returnedPin])
-              );
-            console.log(markerList);
+            console.log('MARKERLIST: ', markerList);
+            setModalVisible(!modalVisible);
           }}
         >
-          <Text style={styles.addPinButtonText}>Add Pin</Text>
+          <Text style={styles.addPinButtonText}>ADD PIN</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundimage: {
     flex: 1,
-    backgroundColor: colors.backgroundColor,
+    height: '105%',
   },
   mapStyle: {
     width: Dimensions.get('window').width,
@@ -155,14 +192,16 @@ const styles = StyleSheet.create({
   addPinButton: {
     alignSelf: 'center',
     backgroundColor: colors.primary,
-    width: '40%',
+    width: '60%',
     borderRadius: 10,
     paddingVertical: 15,
-    top: 70,
+    top: 25,
   },
   addPinButtonText: {
     textAlign: 'center',
     color: colors.backgroundColor,
+    fontWeight: '900',
+    fontSize: 20,
   },
 });
 
