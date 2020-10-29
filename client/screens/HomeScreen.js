@@ -138,30 +138,8 @@ function HomeScreen(props) {
         <TouchableOpacity
           style={styles.addPinButton}
           onPress={() => {
-            // addNewPin();
             console.log('MARKERLIST: ', markerList);
-            // dispatch({
-            // type: "addPin",
             setModalVisible(true);
-            // console.log('USERINPUT: ', userinput);
-            // const newPin = {
-            //   coordinate: {
-            //     latitude: currentLocation.latitude,
-            //     longitude: currentLocation.longitude,
-            //   },
-            //   title: `LAFE2`,
-            //   description: `Here lies a park.2`,
-            //   pinColor: 'red',
-            // };
-            // functions
-            //   .postMarker(newPin)
-            //   .then((returnedPin) => {
-            //     // console.log('this is the returnedPin:', returnedPin)
-            //     setMarkerList([...markerList, returnedPin]);
-            //   })
-            //   .then(() => {
-            //     // console.log(markerList);
-            //   });
           }}
         >
           <Text style={styles.addPinButtonText}>Add Pin</Text>

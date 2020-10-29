@@ -81,13 +81,11 @@ function InputModalComponent(props) {
                     .postMarker(newPin)
                     .then((returnedPin) => {
                       console.log('RETURNEDPIN: ', returnedPin);
-                      // props.addingMarkertoMarkerList(returnedPin);
+                      props.addingMarkertoMarkerList(returnedPin);
                     })
-                    .then(() => {
-                      // console.log(markerList);
-                    });
+                    .catch((err) => console.log(err));
 
-                  // props.toggleInputModalHandler();
+                  props.toggleInputModalHandler();
                 }}
               >
                 <Text style={styles.addButtonText} resizeMode="contain">

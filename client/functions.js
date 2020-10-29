@@ -26,8 +26,8 @@ module.exports = {
           // this is where we update state, so we need to return the right type of object to send to setMarkerList
           return {
             coordinate: { latitude: data.latitude, longitude: data.longitude },
-            title: data.eventName,
-            description: data.eventDescription,
+            title: data['event_name'],
+            description: data['event_description'],
             pinColor: 'green',
           };
         })
