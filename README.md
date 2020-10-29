@@ -35,7 +35,7 @@ Team Orion Archive will strive to continuously release updates and additional fe
 
         npm run server
 
-4.  Once Orion Archive is opened on http://localhost:19002, Download the <strong>Expo Client</strong> on your iPhone, then scan the QR Code that is viewable from the localhost or if you have xCode on your desktop, select <strong>Run on iOS simulator</strong> from the localhost menu.
+4.  Once Orion Archive is opened on http://localhost:19002, Download the <a href="https://expo.io/tools">Expo Client</a> on your iPhone, then scan the QR Code that is viewable from the localhost or if you have xCode on your desktop, select <strong>Run on iOS simulator</strong> from the localhost menu.
 
 5.  Replace the following end routes (with the updated routes after inserting your WIFI IP Address) for the 2 fetch requests located in <strong>Client > functions.js</strong>:
 
