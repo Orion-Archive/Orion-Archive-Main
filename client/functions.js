@@ -7,7 +7,7 @@ module.exports = {
     // const userId = document.getElementById('desc').value;
 
     if (eventName && eventDescription) {
-      return fetch('http://192.168.0.8:3333/newMarker', {
+      return fetch('http://192.168.1.14:3333/newMarker', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

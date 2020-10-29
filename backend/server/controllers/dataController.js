@@ -5,7 +5,7 @@ module.exports = {
 		console.log("In putMarker middleware")
 		const { eventName, latitude, longitude, eventDescription } = req.body;
 
-		QUERYSTRING = `INSERT INTO events (event_name, event_description, latitude, longitude, time) VALUES ($1, $2, $3, $4, now()) RETURNING *;`;
+		QUERYSTRING = `INSERT INTO events (event_name, latitude, longitude, event_description) VALUES ($1, $2, $3, $4) RETURNING *;`;
 		VALUES = [eventName, latitude, longitude, eventDescription];
 
 		db.query(QUERYSTRING, VALUES, (err, response) => {
