@@ -1,5 +1,5 @@
 <div align="center">
-<img src="./client/assets/orion-readme-logo.png" width=300px>
+<img src="./client/assets/orion-readme-logo.png" width=500px>
 </div>
 
 <br>
