@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import colors from '../config/colors';
 import {
   Modal,
@@ -10,7 +10,28 @@ import {
 } from 'react-native';
 import { Input } from 'react-native-elements';
 
+const functions = require('../functions');
+
 function InputModalComponent(props) {
+  const [userinputTitle, setuserinputTitle] = useState('');
+
+  const [userinputDescription, setuserinputDescription] = useState('');
+
+  const onChangeHandlerTitle = (value) => {
+    setuserinputTitle(value);
+  };
+
+  const onChangeHandlerDescription = (value) => {
+    setuserinputDescription(value);
+  };
+
+  const resetUserInput = () => {
+    setuserinput({
+      title: '',
+      description: '',
+    });
+  };
+
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -25,12 +46,12 @@ function InputModalComponent(props) {
             <Input
               placeholder="Title"
               style={styles.inputFields}
-              onChange={props.onChangeHandlerTitle}
+              onChangeText={(value) => onChangeHandlerTitle(value)}
             />
             <Input
               placeholder="Description"
               style={styles.inputFields}
-              onChange={props.onChangeHandlerDescription}
+              onChangeText={(value) => onChangeHandlerDescription(value)}
             />
             <Button title="Upload Photos/Videos" />
           </View>
@@ -39,7 +60,35 @@ function InputModalComponent(props) {
             <View style={{ flex: 1 }}>
               <TouchableHighlight
                 style={styles.addButton}
-                onPress={props.toggleInputModalHandler}
+                onPress={() => {
+                  console.log('USERINPUTTITLE: ', userinputTitle);
+                  console.log('USERINPUTDESCRIPTION: ', userinputDescription);
+                  console.log(
+                    'PROPS.CURRENTLOCATION.LATITUDE: ',
+                    props.currentLocation.latitude
+                  );
+                  const newPin = {
+                    coordinate: {
+                      latitude: props.currentLocation.latitude,
+                      longitude: props.currentLocation.longitude,
+                    },
+                    title: userinputTitle,
+                    description: userinputDescription,
+                    pinColor: 'red',
+                  };
+
+                  functions
+                    .postMarker(newPin)
+                    .then((returnedPin) => {
+                      console.log('RETURNEDPIN: ', returnedPin);
+                      // props.addingMarkertoMarkerList(returnedPin);
+                    })
+                    .then(() => {
+                      // console.log(markerList);
+                    });
+
+                  // props.toggleInputModalHandler();
+                }}
               >
                 <Text style={styles.addButtonText} resizeMode="contain">
                   Confirm
