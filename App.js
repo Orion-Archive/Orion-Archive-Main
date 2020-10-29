@@ -5,7 +5,7 @@ import DisplayModalComponent from './client/components/DisplayModalComponent';
 import InputModalComponent from './client/components/InputModalComponent';
 
 const MainNavigator = createSwitchNavigator({
-  Atlas: { screen: InputModalComponent },
+  Atlas: { screen: HomeScreen },
   LoginScreen: { screen: LoginScreen },
 });
 

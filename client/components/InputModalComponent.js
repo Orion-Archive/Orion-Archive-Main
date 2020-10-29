@@ -12,18 +12,17 @@ import {
 import { Input } from 'react-native-elements';
 
 function InputModalComponent(props) {
-  // const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
       <Modal
         style={styles.modal}
         animationType="slide"
         transparent={true}
-        /* visible={modalVisible} */
-        visible={true}
+        visible={props.modalVisible}
+        // visible={true}
       >
         <View style={styles.modalView}>
-          <Text style={styles.modalHeader}>ADD PIN</Text>
+          <Text style={styles.modalHeader}>ADD EVENT</Text>
           {/* <ScrollView
             style={styles.ScrollView}
             showsVerticalScrollIndicator={false}
@@ -32,7 +31,7 @@ function InputModalComponent(props) {
 
           {/* </ScrollView> */}
           <View style={styles.inputContainer}>
-            <Input placeholder="Event Title" style={styles.inputFields} />
+            <Input placeholder="Title" style={styles.inputFields} />
             <Input placeholder="Description" style={styles.inputFields} />
             <Button title="Upload Photos/Videos" />
           </View>
@@ -42,8 +41,8 @@ function InputModalComponent(props) {
               <TouchableHighlight
                 style={styles.addButton}
                 onPress={() => {
-                  /* setModalVisible(!modalVisible); */
-                  setModalVisible(false);
+                  setModalVisible(!modalVisible);
+                  // setModalVisible(false);
                 }}
               >
                 <Text style={styles.addButtonText} resizeMode="contain">
@@ -55,8 +54,8 @@ function InputModalComponent(props) {
               <TouchableHighlight
                 style={styles.closingButton}
                 onPress={() => {
-                  /* setModalVisible(!modalVisible); */
-                  setModalVisible(false);
+                  setModalVisible(!props.modalVisible);
+                  // setModalVisible(false);
                 }}
               >
                 <Text style={styles.closingButtonText}>Cancel</Text>
@@ -67,14 +66,14 @@ function InputModalComponent(props) {
       </Modal>
 
       {/* NEED TO UPDATE THIS - THIS BUTTON TRIGGERS THE MODAL TO OPEN */}
-      <TouchableHighlight
+      {/* <TouchableHighlight
         style={styles.openButton}
         onPress={() => {
           setModalVisible(true);
         }}
       >
         <Text>Show Modal</Text>
-      </TouchableHighlight>
+      </TouchableHighlight> */}
     </View>
   );
 }
@@ -123,7 +122,7 @@ const styles = StyleSheet.create({
   },
   modalHeader: {
     color: colors.secondary,
-    fontSize: 75,
+    fontSize: 50,
     fontWeight: '900',
   },
   modalNav: {

@@ -5,9 +5,9 @@ module.exports = {
     const latitude = newPin.coordinate.latitude;
     const longitude = newPin.coordinate.longitude;
     // const userId = document.getElementById('desc').value;
-
     if (eventName && eventDescription) {
-      return fetch('http://192.168.1.14:3333/newMarker', {
+      // REPLACE THE IP ADDRESS WITH YOUR NETWORK WIFI IP ADDRESS
+      return fetch('http://192.168.1.89:3333/newMarker', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

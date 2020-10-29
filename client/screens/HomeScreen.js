@@ -9,6 +9,8 @@ import {
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import colors from '../config/colors';
 import * as Location from 'expo-location';
+import InputModalComponent from '../components/InputModalComponent';
+
 const functions = require('../functions');
 
 function HomeScreen(props) {
@@ -50,7 +52,10 @@ function HomeScreen(props) {
     latitudeDelta: 5,
     longitudeDelta: 5,
   });
+
   const [errorMsg, setErrorMsg] = useState(null);
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -58,7 +63,6 @@ function HomeScreen(props) {
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
       }
-
       let location = await Location.getCurrentPositionAsync({});
       setLocation({
         latitude: parseFloat(location.coords.latitude),
@@ -78,7 +82,6 @@ function HomeScreen(props) {
     mapRef.current.getMapRef().animateToRegion(initialRegion, 2000);
   }
   */
-
   // const addNewPin = () => {
   //   const newPin = {
   //     coordinate: { latitude: region.latitude, longitude: region.longitude },
@@ -102,8 +105,8 @@ function HomeScreen(props) {
           longitudeDelta: 0.0421,
         }}
         onRegionChangeComplete={(region) => {
-          console.log('this is region!', region)
-          setCurrentLocation(region)
+          console.log('this is region!', region);
+          setCurrentLocation(region);
         }}
       >
         {markerList.map((marker) => (
@@ -116,13 +119,17 @@ function HomeScreen(props) {
         ))}
       </MapView>
       <View>
+        <InputModalComponent modalVisible={modalVisible} />
         <TouchableOpacity
           style={styles.addPinButton}
           onPress={() => {
             // addNewPin();
-            // console.log(markerList);
+            console.log(markerList);
             // dispatch({
             // type: "addPin",
+
+            setModalVisible(true);
+
             const newPin = {
               coordinate: {
                 latitude: currentLocation.latitude,
@@ -136,11 +143,11 @@ function HomeScreen(props) {
               .postMarker(newPin)
               .then((returnedPin) => {
                 // console.log('this is the returnedPin:', returnedPin)
-                setMarkerList([...markerList, returnedPin])
+                setMarkerList([...markerList, returnedPin]);
               })
               .then(() => {
                 // console.log(markerList);
-              })
+              });
           }}
         >
           <Text style={styles.addPinButtonText}>Add Pin</Text>
