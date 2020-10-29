@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState, useReducer, useEffect, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -82,24 +82,16 @@ function HomeScreen(props) {
     })();
   }, []);
 
-  /*
-    var mapRef;
-    const goToInitialLocation = () => {
-    let initialRegion = Object.assign({}, location);
-    initialRegion["latitudeDelta"] = 0.005;
-    initialRegion["longitudeDelta"] = 0.005;
-    mapRef.current.getMapRef().animateToRegion(initialRegion, 2000);
-  }
-  */
-  // const addNewPin = () => {
-  //   const newPin = {
-  //     coordinate: { latitude: region.latitude, longitude: region.longitude },
-  //     title: `LAFE2`,
-  //     description: `Here lies a park.2`,
-  //     pinColor: 'red',
-  //   };
-  //   setMarkerList([...markerList, newPin]);
-  // };
+  const mapRef = useRef();
+  const animateToRegion = () => {
+    let region = {
+      latitude: location.latitude,
+      longitude: location.longitude,
+      latitudeDelta: 0.005,
+      longitudeDelta: 0.005,
+    };
+    mapRef.current.animateToRegion(region, 1000);
+  };
 
   return (
     <ImageBackground
@@ -108,6 +100,7 @@ function HomeScreen(props) {
       resizeMode="contain"
     >
       <MapView
+        ref={mapRef}
         style={styles.mapStyle}
         provider={PROVIDER_GOOGLE}
         showsUserLocation={true}
@@ -118,9 +111,12 @@ function HomeScreen(props) {
           longitudeDelta: 0.0421,
         }}
         onRegionChangeComplete={(region) => {
-          console.log('this is region!', region);
+          console.log(location.longitude, location.latitude);
           setCurrentLocation(region);
         }}
+        // MAY NEED TO CHANGE THIS TO A BUTTON FOR NOW BECAUSE IT TAKES FOREVER
+        // TO GET USER COORDINATES . . .
+        // onMapReady={animateToRegion}
       >
         {markerList.map((marker) => (
           <Marker
