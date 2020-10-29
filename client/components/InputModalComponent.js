@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-function ModalComponent(props) {
+function InputModalComponent(props) {
   // const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
@@ -78,8 +78,7 @@ function ModalComponent(props) {
                 }}
               >
                 <Text style={styles.addButtonText} resizeMode="contain">
-                  {' '}
-                  +{' '}
+                  Confirm
                 </Text>
               </TouchableHighlight>
             </View>
@@ -91,7 +90,7 @@ function ModalComponent(props) {
                   setModalVisible(false);
                 }}
               >
-                <Text style={styles.closingButtonText}>X</Text>
+                <Text style={styles.closingButtonText}>Cancel</Text>
               </TouchableHighlight>
             </View>
           </View>
@@ -170,14 +169,14 @@ const styles = StyleSheet.create({
   addButton: {
     backgroundColor: colors.primary,
     borderRadius: 20,
-    padding: 10,
+    padding: 14,
     marginRight: 5,
     elevation: 2,
   },
   addButtonText: {
     color: colors.backgroundColor,
     fontWeight: '900',
-    fontSize: 20,
+    fontSize: 16,
     textAlign: 'center',
   },
   ScrollView: {
@@ -193,14 +192,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalComponent;
-
-/**
- * INITIAL MODAL:
- * 		A. TOP NAV
- * 				1. ADD BUTTON
- * 						A: SIGNED IN? NAVIGATES YOU TO DIFF SCREEN
- * 						B: NOT SIGNED IN? NAVIGATES YOU TO THE LOGINSCREEN
- * 				2. X CLOSING BUTTON
- * 		B. SCROLLABLE EVENT LIST
- */
+export default InputModalComponent;
