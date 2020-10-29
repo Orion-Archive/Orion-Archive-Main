@@ -51,9 +51,9 @@ Team Orion Archive will strive to continuously release updates and additional fe
 
 Users can use their google accounts to sign into Orion Archive to access the application's core features.
 
-<center>
+<div align="center">
 <img src="./client/assets/googleoauth.gif" width=300px>
-</center>
+</div>
 
 <br>
 
@@ -63,17 +63,17 @@ After signing in, the user will have access to the atlas and will be able to exp
 
 If you select on any pin, it will trigger an event details modal that will list all the events that are associated with that pin location. As of right now, we have the data hardcoded. The user could then add an event to that same pin or choose to exit the event details modal.
 
-<center>
+<div align="center">
 	<img src="./client/assets/displaymodal.gif" width=300px>
-</center>
+</div>
 
 <br>
 
 Instead of viewing other pins, the user could add a pin to the atlas as well. By selecting the add pin button located on the bottom of the screen, an add event modal will populate requesting the user to input an event title and description.
 
-<center>
+<div align="center">
 	<img src="./client/assets/addpin.gif" width=300px>
-</center>
+</div>
 
 <br>
 
