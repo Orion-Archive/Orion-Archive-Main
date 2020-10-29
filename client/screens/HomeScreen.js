@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
+  ImageBackground,
 } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import colors from '../config/colors';
@@ -101,7 +102,11 @@ function HomeScreen(props) {
   // };
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require('../assets/addpin-background.png')}
+      style={styles.backgroundimage}
+      resizeMode="contain"
+    >
       <MapView
         style={styles.mapStyle}
         provider={PROVIDER_GOOGLE}
@@ -130,29 +135,28 @@ function HomeScreen(props) {
         <InputModalComponent
           modalVisible={modalVisible}
           toggleInputModalHandler={toggleInputModalHandler}
-          // onChangeHandlerTitle={onChangeHandlerTitle}
-          // onChangeHandlerDescription={onChangeHandlerDescription}
           currentLocation={currentLocation}
           addingMarkertoMarkerList={addingMarkertoMarkerList}
         />
+
         <TouchableOpacity
           style={styles.addPinButton}
           onPress={() => {
             console.log('MARKERLIST: ', markerList);
-            setModalVisible(true);
+            setModalVisible(!modalVisible);
           }}
         >
-          <Text style={styles.addPinButtonText}>Add Pin</Text>
+          <Text style={styles.addPinButtonText}>ADD PIN</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundimage: {
     flex: 1,
-    backgroundColor: colors.backgroundColor,
+    height: '105%',
   },
   mapStyle: {
     width: Dimensions.get('window').width,
@@ -161,14 +165,16 @@ const styles = StyleSheet.create({
   addPinButton: {
     alignSelf: 'center',
     backgroundColor: colors.primary,
-    width: '40%',
+    width: '60%',
     borderRadius: 10,
     paddingVertical: 15,
-    top: 70,
+    top: 50,
   },
   addPinButtonText: {
     textAlign: 'center',
     color: colors.backgroundColor,
+    fontWeight: '900',
+    fontSize: 20,
   },
 });
 

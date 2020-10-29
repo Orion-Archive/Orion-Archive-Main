@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Input } from 'react-native-elements';
 import colors from '../config/colors';
 import {
   Modal,
@@ -8,7 +9,6 @@ import {
   Button,
   View,
 } from 'react-native';
-import { Input } from 'react-native-elements';
 
 const functions = require('../functions');
 
@@ -16,21 +16,6 @@ function InputModalComponent(props) {
   const [userinputTitle, setuserinputTitle] = useState('');
 
   const [userinputDescription, setuserinputDescription] = useState('');
-
-  const onChangeHandlerTitle = (value) => {
-    setuserinputTitle(value);
-  };
-
-  const onChangeHandlerDescription = (value) => {
-    setuserinputDescription(value);
-  };
-
-  const resetUserInput = () => {
-    setuserinput({
-      title: '',
-      description: '',
-    });
-  };
 
   return (
     <View style={styles.centeredView}>
@@ -46,27 +31,20 @@ function InputModalComponent(props) {
             <Input
               placeholder="Title"
               style={styles.inputFields}
-              onChangeText={(value) => onChangeHandlerTitle(value)}
+              onChangeText={(value) => setuserinputTitle(value)}
             />
             <Input
               placeholder="Description"
               style={styles.inputFields}
-              onChangeText={(value) => onChangeHandlerDescription(value)}
+              onChangeText={(value) => setuserinputDescription(value)}
             />
             <Button title="Upload Photos/Videos" />
           </View>
-
           <View style={styles.modalNav}>
             <View style={{ flex: 1 }}>
               <TouchableHighlight
                 style={styles.addButton}
                 onPress={() => {
-                  console.log('USERINPUTTITLE: ', userinputTitle);
-                  console.log('USERINPUTDESCRIPTION: ', userinputDescription);
-                  console.log(
-                    'PROPS.CURRENTLOCATION.LATITUDE: ',
-                    props.currentLocation.latitude
-                  );
                   const newPin = {
                     coordinate: {
                       latitude: props.currentLocation.latitude,
@@ -161,11 +139,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  modalText: {
-    marginBottom: 35,
-    textAlign: 'left',
-    color: colors.white,
-  },
   modalView: {
     top: 175,
     marginTop: 50,
@@ -182,18 +155,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-  },
-  openButton: {
-    backgroundColor: colors.primary,
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  ScrollView: {
-    height: '100%',
-    marginTop: 25,
-    marginVertical: 15,
-    marginHorizontal: 15,
   },
 });
 

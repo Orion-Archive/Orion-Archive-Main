@@ -1,12 +1,11 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import LoginScreen from './client/screens/LoginScreen';
 import HomeScreen from './client/screens/HomeScreen';
-import DisplayModalComponent from './client/components/DisplayModalComponent';
-import InputModalComponent from './client/components/InputModalComponent';
 
+// APP WILL RENDER THE LOGINSCREEN FIRST, THEN WILL RENDER HOMESCREEN AFTER SUCCESSFUL OAUTH
 const MainNavigator = createSwitchNavigator({
-  Atlas: { screen: HomeScreen },
   LoginScreen: { screen: LoginScreen },
+  Atlas: { screen: HomeScreen },
 });
 
 const App = createAppContainer(MainNavigator);
