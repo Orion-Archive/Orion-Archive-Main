@@ -1,0 +1,30 @@
+{
+	"expo": {
+		"name": "OrionArchive",
+		"slug": "OrionArchive",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./client/assets/icon.png",
+		"splash": {
+			"image": "./client/assets/splash.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ffffff"
+		},
+		"updates": {
+			"fallbackToCacheTimeout": 0
+		},
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true,
+			"bundleIdentifier": "com.webiosandroid.all",
+			"config": {
+				"googleSignIn": {
+					"reservedClientId": "com.googleusercontent.apps.258118252981-16ai6c8m8t0athp7qm8np8hkcjlc30dm.apps.googleusercontent.com"
+				}
+			}
+		},
+		"web": {
+			"favicon": "./client/assets/favicon.png"
+		}
+	}
+}
