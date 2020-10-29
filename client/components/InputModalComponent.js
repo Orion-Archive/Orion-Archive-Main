@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import colors from '../config/colors';
 import {
-  Alert,
   Modal,
   StyleSheet,
   Text,
@@ -19,20 +18,20 @@ function InputModalComponent(props) {
         animationType="slide"
         transparent={true}
         visible={props.modalVisible}
-        // visible={true}
       >
         <View style={styles.modalView}>
           <Text style={styles.modalHeader}>ADD EVENT</Text>
-          {/* <ScrollView
-            style={styles.ScrollView}
-            showsVerticalScrollIndicator={false}
-          >
-            {/* NEED TO REPLACE THIS HARD CODED TEXT - POPULATE <TEXT> WITH OUR EVENTS FROM THE DB USING GET REQUEST */}
-
-          {/* </ScrollView> */}
           <View style={styles.inputContainer}>
-            <Input placeholder="Title" style={styles.inputFields} />
-            <Input placeholder="Description" style={styles.inputFields} />
+            <Input
+              placeholder="Title"
+              style={styles.inputFields}
+              onChange={props.onChangeHandlerTitle}
+            />
+            <Input
+              placeholder="Description"
+              style={styles.inputFields}
+              onChange={props.onChangeHandlerDescription}
+            />
             <Button title="Upload Photos/Videos" />
           </View>
 
@@ -40,10 +39,7 @@ function InputModalComponent(props) {
             <View style={{ flex: 1 }}>
               <TouchableHighlight
                 style={styles.addButton}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                  // setModalVisible(false);
-                }}
+                onPress={props.toggleInputModalHandler}
               >
                 <Text style={styles.addButtonText} resizeMode="contain">
                   Confirm
@@ -53,10 +49,7 @@ function InputModalComponent(props) {
             <View style={{ flex: 1 }}>
               <TouchableHighlight
                 style={styles.closingButton}
-                onPress={() => {
-                  setModalVisible(!props.modalVisible);
-                  // setModalVisible(false);
-                }}
+                onPress={props.toggleInputModalHandler}
               >
                 <Text style={styles.closingButtonText}>Cancel</Text>
               </TouchableHighlight>
@@ -64,16 +57,6 @@ function InputModalComponent(props) {
           </View>
         </View>
       </Modal>
-
-      {/* NEED TO UPDATE THIS - THIS BUTTON TRIGGERS THE MODAL TO OPEN */}
-      {/* <TouchableHighlight
-        style={styles.openButton}
-        onPress={() => {
-          setModalVisible(true);
-        }}
-      >
-        <Text>Show Modal</Text>
-      </TouchableHighlight> */}
     </View>
   );
 }

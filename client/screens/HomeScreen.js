@@ -57,6 +57,29 @@ function HomeScreen(props) {
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [userinput, setuserinput] = useState({
+    title: '',
+    description: '',
+  });
+
+  const toggleInputModalHandler = () => {
+    setModalVisible(!modalVisible);
+  };
+
+  const onChangeHandlerTitle = (e) => {
+    setuserinput({
+      ...props.userinput,
+      title: e.target.value,
+    });
+  };
+
+  const onChangeHandlerDescription = (e) => {
+    setuserinput({
+      ...props.userinput,
+      description: e.target.value,
+    });
+  };
+
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestPermissionsAsync();
@@ -119,7 +142,12 @@ function HomeScreen(props) {
         ))}
       </MapView>
       <View>
-        <InputModalComponent modalVisible={modalVisible} />
+        <InputModalComponent
+          modalVisible={modalVisible}
+          toggleInputModalHandler={toggleInputModalHandler}
+          onChangeHandlerTitle={onChangeHandlerTitle}
+          onChangeHandlerDescription={onChangeHandlerDescription}
+        />
         <TouchableOpacity
           style={styles.addPinButton}
           onPress={() => {
@@ -129,7 +157,7 @@ function HomeScreen(props) {
             // type: "addPin",
 
             setModalVisible(true);
-
+            console.log('USERINPUT: ', userinput);
             const newPin = {
               coordinate: {
                 latitude: currentLocation.latitude,
