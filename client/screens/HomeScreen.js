@@ -5,10 +5,13 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
+  ImageBackground,
 } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import colors from '../config/colors';
 import * as Location from 'expo-location';
+import InputModalComponent from '../components/InputModalComponent';
+
 const functions = require('../functions');
 
 function HomeScreen(props) {
@@ -50,7 +53,18 @@ function HomeScreen(props) {
     latitudeDelta: 5,
     longitudeDelta: 5,
   });
+
   const [errorMsg, setErrorMsg] = useState(null);
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const toggleInputModalHandler = () => {
+    setModalVisible(!modalVisible);
+  };
+
+  const addingMarkertoMarkerList = (newMarker) => {
+    setMarkerList([...markerList, newMarker]);
+  };
 
   useEffect(() => {
     (async () => {
@@ -58,7 +72,6 @@ function HomeScreen(props) {
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
       }
-
       let location = await Location.getCurrentPositionAsync({});
       setLocation({
         latitude: parseFloat(location.coords.latitude),
@@ -78,7 +91,6 @@ function HomeScreen(props) {
     mapRef.current.getMapRef().animateToRegion(initialRegion, 2000);
   }
   */
-
   // const addNewPin = () => {
   //   const newPin = {
   //     coordinate: { latitude: region.latitude, longitude: region.longitude },
@@ -90,7 +102,11 @@ function HomeScreen(props) {
   // };
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require('../assets/addpin-background.png')}
+      style={styles.backgroundimage}
+      resizeMode="contain"
+    >
       <MapView
         style={styles.mapStyle}
         provider={PROVIDER_GOOGLE}
@@ -102,8 +118,8 @@ function HomeScreen(props) {
           longitudeDelta: 0.0421,
         }}
         onRegionChangeComplete={(region) => {
-          console.log('this is region!', region)
-          setCurrentLocation(region)
+          console.log('this is region!', region);
+          setCurrentLocation(region);
         }}
       >
         {markerList.map((marker) => (
@@ -116,44 +132,31 @@ function HomeScreen(props) {
         ))}
       </MapView>
       <View>
+        <InputModalComponent
+          modalVisible={modalVisible}
+          toggleInputModalHandler={toggleInputModalHandler}
+          currentLocation={currentLocation}
+          addingMarkertoMarkerList={addingMarkertoMarkerList}
+        />
+
         <TouchableOpacity
           style={styles.addPinButton}
           onPress={() => {
-            // addNewPin();
-            // console.log(markerList);
-            // dispatch({
-            // type: "addPin",
-            const newPin = {
-              coordinate: {
-                latitude: currentLocation.latitude,
-                longitude: currentLocation.longitude,
-              },
-              title: `LAFE2`,
-              description: `Here lies a park.2`,
-              pinColor: 'red',
-            };
-            functions
-              .postMarker(newPin)
-              .then((returnedPin) => {
-                // console.log('this is the returnedPin:', returnedPin)
-                setMarkerList([...markerList, returnedPin])
-              })
-              .then(() => {
-                // console.log(markerList);
-              })
+            console.log('MARKERLIST: ', markerList);
+            setModalVisible(!modalVisible);
           }}
         >
-          <Text style={styles.addPinButtonText}>Add Pin</Text>
+          <Text style={styles.addPinButtonText}>ADD PIN</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  backgroundimage: {
     flex: 1,
-    backgroundColor: colors.backgroundColor,
+    height: '105%',
   },
   mapStyle: {
     width: Dimensions.get('window').width,
@@ -162,14 +165,16 @@ const styles = StyleSheet.create({
   addPinButton: {
     alignSelf: 'center',
     backgroundColor: colors.primary,
-    width: '40%',
+    width: '60%',
     borderRadius: 10,
     paddingVertical: 15,
-    top: 70,
+    top: 50,
   },
   addPinButtonText: {
     textAlign: 'center',
     color: colors.backgroundColor,
+    fontWeight: '900',
+    fontSize: 20,
   },
 });
 

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-function ModalComponent(props) {
+function DisplayModalComponent(props) {
   // const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalComponent;
+export default DisplayModalComponent;
 
 /**
  * INITIAL MODAL:

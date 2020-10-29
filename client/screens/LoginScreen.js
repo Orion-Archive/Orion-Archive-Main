@@ -1,7 +1,6 @@
 import React from 'react';
 import { IOS_CLIENT_ID } from '@env';
 import {
-  Text,
   View,
   StyleSheet,
   Image,
@@ -82,12 +81,12 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
   },
-  title: {
-    fontSize: 35,
-  },
   signin: {
     top: -50,
     width: 250,
+  },
+  title: {
+    fontSize: 35,
   },
 });
 
