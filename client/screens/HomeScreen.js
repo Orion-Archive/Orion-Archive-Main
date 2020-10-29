@@ -1,4 +1,10 @@
-import React, { useState, useReducer, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useReducer,
+  useEffect,
+  useRef,
+  useLayoutEffect,
+} from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,6 +17,7 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import colors from '../config/colors';
 import * as Location from 'expo-location';
 import InputModalComponent from '../components/InputModalComponent';
+import DisplayModalComponent from '../components/DisplayModalComponent';
 
 const functions = require('../functions');
 
@@ -58,29 +65,46 @@ function HomeScreen(props) {
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [displayVisible, setDisplayVisible] = useState(false);
+
   const toggleInputModalHandler = () => {
     setModalVisible(!modalVisible);
+  };
+
+  const toggleDisplayModalHandler = () => {
+    setDisplayVisible(!displayVisible);
   };
 
   const addingMarkertoMarkerList = (newMarker) => {
     setMarkerList([...markerList, newMarker]);
   };
 
+  // useLayoutEffect
+  // add all pin locations from database onto map upon initial render
   useEffect(() => {
     (async () => {
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-      }
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation({
-        latitude: parseFloat(location.coords.latitude),
-        longitude: parseFloat(location.coords.longitude),
-        latitudeDelta: 5,
-        longitudeDelta: 5,
-      });
+      const initialMarkerList = await functions.getMarkers();
+      console.log('INITIALMARKERLIST: ', initialMarkerList);
+      setMarkerList(initialMarkerList);
+      console.log('MARKERLIST USEEFFECT: ', markerList);
     })();
   }, []);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     let { status } = await Location.requestPermissionsAsync();
+  //     if (status !== 'granted') {
+  //       setErrorMsg('Permission to access location was denied');
+  //     }
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLocation({
+  //       latitude: parseFloat(location.coords.latitude),
+  //       longitude: parseFloat(location.coords.longitude),
+  //       latitudeDelta: 5,
+  //       longitudeDelta: 5,
+  //     });
+  //   })();
+  // }, []);
 
   const mapRef = useRef();
   const animateToRegion = () => {
@@ -111,12 +135,13 @@ function HomeScreen(props) {
           longitudeDelta: 0.0421,
         }}
         onRegionChangeComplete={(region) => {
-          console.log(location.longitude, location.latitude);
+          console.log(
+            'CURRENT LOCATION: ',
+            location.longitude,
+            location.latitude
+          );
           setCurrentLocation(region);
         }}
-        // MAY NEED TO CHANGE THIS TO A BUTTON FOR NOW BECAUSE IT TAKES FOREVER
-        // TO GET USER COORDINATES . . .
-        // onMapReady={animateToRegion}
       >
         {markerList.map((marker) => (
           <Marker
@@ -124,10 +149,16 @@ function HomeScreen(props) {
             title={marker.title}
             description={marker.description}
             pinColor={marker.pinColor}
+            onPress={toggleDisplayModalHandler}
           />
         ))}
       </MapView>
       <View>
+        <DisplayModalComponent
+          displayVisible={displayVisible}
+          toggleDisplayModalHandler={toggleDisplayModalHandler}
+          toggleInputModalHandler={toggleInputModalHandler}
+        />
         <InputModalComponent
           modalVisible={modalVisible}
           toggleInputModalHandler={toggleInputModalHandler}
@@ -164,7 +195,7 @@ const styles = StyleSheet.create({
     width: '60%',
     borderRadius: 10,
     paddingVertical: 15,
-    top: 50,
+    top: 25,
   },
   addPinButtonText: {
     textAlign: 'center',
