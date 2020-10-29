@@ -79,15 +79,11 @@ Instead of viewing other pins, the user could add a pin to the atlas as well. By
 
 ## Built With
 
-- React
-- TypeScript
-- CodeMirror
-- React-ChartJS
+- React Native
+- Google OAuth
 - Node.JS
   - Express
-  - Multer
-- AWS RDS
-  - PostgreSQL
+- PostgreSQL
 
 <br>
 
