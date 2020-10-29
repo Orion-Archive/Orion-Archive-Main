@@ -11,6 +11,7 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import colors from '../config/colors';
 import * as Location from 'expo-location';
 import InputModalComponent from '../components/InputModalComponent';
+import DisplayModalComponent from '../components/DisplayModalComponent';
 
 const functions = require('../functions');
 
@@ -58,8 +59,14 @@ function HomeScreen(props) {
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [displayVisible, setDisplayVisible] = useState(false);
+
   const toggleInputModalHandler = () => {
     setModalVisible(!modalVisible);
+  };
+
+  const toggleDisplayModalHandler = () => {
+    setDisplayVisible(!displayVisible);
   };
 
   const addingMarkertoMarkerList = (newMarker) => {
@@ -128,10 +135,16 @@ function HomeScreen(props) {
             title={marker.title}
             description={marker.description}
             pinColor={marker.pinColor}
+            onPress={toggleDisplayModalHandler}
           />
         ))}
       </MapView>
       <View>
+        <DisplayModalComponent
+          displayVisible={displayVisible}
+          toggleDisplayModalHandler={toggleDisplayModalHandler}
+          toggleInputModalHandler={toggleInputModalHandler}
+        />
         <InputModalComponent
           modalVisible={modalVisible}
           toggleInputModalHandler={toggleInputModalHandler}
@@ -168,7 +181,7 @@ const styles = StyleSheet.create({
     width: '60%',
     borderRadius: 10,
     paddingVertical: 15,
-    top: 50,
+    top: 25,
   },
   addPinButtonText: {
     textAlign: 'center',

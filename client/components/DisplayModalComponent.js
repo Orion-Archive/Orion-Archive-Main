@@ -16,8 +16,7 @@ function DisplayModalComponent(props) {
       <Modal
         animationType="slide"
         transparent={true}
-        /* visible={modalVisible} */
-        visible={true}
+        visible={props.displayVisible}
       >
         <View style={styles.modalView}>
           <Text style={styles.modalHeader}>EVENTS</Text>
@@ -128,8 +127,8 @@ function DisplayModalComponent(props) {
               <TouchableHighlight
                 style={styles.addButton}
                 onPress={() => {
-                  /* setModalVisible(!modalVisible); */
-                  setModalVisible(false);
+                  props.toggleInputModalHandler();
+                  props.toggleDisplayModalHandler();
                 }}
               >
                 <Text style={styles.addButtonText} resizeMode="contain">
@@ -141,10 +140,7 @@ function DisplayModalComponent(props) {
             <View style={{ flex: 1 }}>
               <TouchableHighlight
                 style={styles.closingButton}
-                onPress={() => {
-                  /* setModalVisible(!modalVisible); */
-                  setModalVisible(false);
-                }}
+                onPress={props.toggleDisplayModalHandler}
               >
                 <Text style={styles.closingButtonText}>X</Text>
               </TouchableHighlight>
@@ -152,16 +148,6 @@ function DisplayModalComponent(props) {
           </View>
         </View>
       </Modal>
-
-      {/* NEED TO UPDATE THIS - THIS BUTTON TRIGGERS THE MODAL TO OPEN */}
-      <TouchableHighlight
-        style={styles.openButton}
-        onPress={() => {
-          setModalVisible(true);
-        }}
-      >
-        <Text>Show Modal</Text>
-      </TouchableHighlight>
     </View>
   );
 }
