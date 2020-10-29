@@ -7,7 +7,7 @@ module.exports = {
     // const userId = document.getElementById('desc').value;
     if (eventName && eventDescription) {
       // REPLACE THE IP ADDRESS WITH YOUR NETWORK WIFI IP ADDRESS
-      return fetch('http://INSERTYOURIPADDRESSHERE:3333/newMarker', {
+      return fetch('YOUR-IP-ADDRESS-GOES-HERE/newMarker', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
