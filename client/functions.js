@@ -42,10 +42,22 @@ module.exports = {
 
   getMarkers: function () {
     console.log('Getting markers...');
-    return fetch('http://192.168.0.8:3333/getMarkers')
+    const locations = [];
+    return fetch('http://192.168.8.107:3333/getMarkers')
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        for (let obj of data.rows) {
+          locations.push({
+            coordinate: { latitude: obj.latitude, longitude: obj.longitude },
+            title: obj['event_name'],
+            description: obj['event_description'],
+            pinColor: 'green',
+          });
+        }
+        console.log(locations);
+        return locations;
+        // console.log(data);
         // this is where we update state, so we need to return the right type of object to send to setMarkerList
       })
       .catch((err) => console.log(err));
