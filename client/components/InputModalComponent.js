@@ -6,68 +6,37 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
+  Button,
   View,
 } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Input } from 'react-native-elements';
 
 function InputModalComponent(props) {
   // const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
       <Modal
+        style={styles.modal}
         animationType="slide"
         transparent={true}
         /* visible={modalVisible} */
         visible={true}
       >
         <View style={styles.modalView}>
-          <Text style={styles.modalHeader}>EVENTS</Text>
-          <ScrollView
+          <Text style={styles.modalHeader}>ADD PIN</Text>
+          {/* <ScrollView
             style={styles.ScrollView}
             showsVerticalScrollIndicator={false}
           >
             {/* NEED TO REPLACE THIS HARD CODED TEXT - POPULATE <TEXT> WITH OUR EVENTS FROM THE DB USING GET REQUEST */}
-            <Text style={styles.modalText}>
-              Hello World! shadowOffsetsdf sd // $FlowFixMesd // $$FlowFixMesd
-              gfs dg dry asdasdasfasfasfa asdasdasfasfasfasfasf
-              asdasdasfasfasfasfasffa sfa Hello World! shadowOffsetsdf sd //
-              $FlowFixMesd // $$FlowFixMesd gfs dg df aet we tw e gf sd f sd f s
-              df w et a shadowOffsetsdf sd fheruergh weqrtweywry
-              asdasdasfasfasfa asdasdasfasfasfasfasf asdasdasfasfasfasfasffa sfa
-            </Text>
-            <Text style={styles.modalText}>
-              Hello World! shadowOffsetsdf sd // $FlowFixMesd // $$FlowFixMesd
-              gfs dg dry asdasdasfasfasfa asdasdasfasfasfasfasf
-              asdasdasfasfasfasfasffa sfa Hello World! shadowOffsetsdf sd //
-              $FlowFixMesd // $$FlowFixMesd gfs dg df aet we tw e gf sd f sd f s
-              df w et a shadowOffsetsdf sd fheruergh weqrtweywry
-              asdasdasfasfasfa asdasdasfasfasfasfasf asdasdasfasfasfasfasffa sfa
-            </Text>
-            <Text style={styles.modalText}>
-              Hello World! shadowOffsetsdf sd // $FlowFixMesd // $$FlowFixMesd
-              gfs dg dry asdasdasfasfasfa asdasdasfasfasfasfasf
-              asdasdasfasfasfasfasffa sfa Hello World! shadowOffsetsdf sd //
-              $FlowFixMesd // $$FlowFixMesd gfs dg df aet we tw e gf sd f sd f s
-              df w et a shadowOffsetsdf sd fheruergh weqrtweywry
-              asdasdasfasfasfa asdasdasfasfasfasfasf asdasdasfasfasfasfasffa sfa
-            </Text>
-            <Text style={styles.modalText}>
-              Hello World! shadowOffsetsdf sd // $FlowFixMesd // $$FlowFixMesd
-              gfs dg dry asdasdasfasfasfa asdasdasfasfasfasfasf
-              asdasdasfasfasfasfasffa sfa Hello World! shadowOffsetsdf sd //
-              $FlowFixMesd // $$FlowFixMesd gfs dg df aet we tw e gf sd f sd f s
-              df w et a shadowOffsetsdf sd fheruergh weqrtweywry
-              asdasdasfasfasfa asdasdasfasfasfasfasf asdasdasfasfasfasfasffa sfa
-            </Text>
-            <Text style={styles.modalText}>
-              Hello World! shadowOffsetsdf sd // $FlowFixMesd // $$FlowFixMesd
-              gfs dg dry asdasdasfasfasfa asdasdasfasfasfasfasf
-              asdasdasfasfasfasfasffa sfa Hello World! shadowOffsetsdf sd //
-              $FlowFixMesd // $$FlowFixMesd gfs dg df aet we tw e gf sd f sd f s
-              df w et a shadowOffsetsdf sd fheruergh weqrtweywry
-              asdasdasfasfasfa asdasdasfasfasfasfasf asdasdasfasfasfasfasffa sfa
-            </Text>
-          </ScrollView>
+
+          {/* </ScrollView> */}
+          <View style={styles.inputContainer}>
+            <Input placeholder="Event Title" style={styles.inputFields} />
+            <Input placeholder="Description" style={styles.inputFields} />
+            <Button title="Upload Photos/Videos" />
+          </View>
+
           <View style={styles.modalNav}>
             <View style={{ flex: 1 }}>
               <TouchableHighlight
@@ -111,45 +80,24 @@ function InputModalComponent(props) {
 }
 
 const styles = StyleSheet.create({
+  addButton: {
+    backgroundColor: colors.primary,
+    borderRadius: 20,
+    padding: 14,
+    marginRight: 5,
+    elevation: 2,
+  },
+  addButtonText: {
+    color: colors.backgroundColor,
+    fontWeight: '900',
+    fontSize: 16,
+    textAlign: 'center',
+  },
   centeredView: {
     flex: 1,
     marginTop: 22,
     justifyContent: 'center',
     alignContent: 'center',
-  },
-  modalView: {
-    flex: 1,
-    marginTop: 50,
-    margin: 20,
-    backgroundColor: colors.backgroundColor,
-    borderRadius: 20,
-    padding: 20,
-    alignItems: 'center',
-    shadowColor: colors.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  modalNav: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-  modalHeader: {
-    color: colors.secondary,
-    fontSize: 75,
-    fontWeight: '900',
-  },
-  openButton: {
-    backgroundColor: colors.primary,
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
   },
   closingButton: {
     backgroundColor: colors.backgroundColor,
@@ -166,29 +114,57 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
-  addButton: {
+  inputContainer: {
+    width: '100%',
+    marginVertical: 30,
+  },
+  inputFields: {
+    color: colors.white,
+  },
+  modalHeader: {
+    color: colors.secondary,
+    fontSize: 75,
+    fontWeight: '900',
+  },
+  modalNav: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
+  modalText: {
+    marginBottom: 35,
+    textAlign: 'left',
+    color: colors.white,
+  },
+  modalView: {
+    top: 175,
+    marginTop: 50,
+    margin: 20,
+    backgroundColor: colors.backgroundColor,
+    borderRadius: 20,
+    padding: 20,
+    alignItems: 'center',
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  openButton: {
     backgroundColor: colors.primary,
     borderRadius: 20,
-    padding: 14,
-    marginRight: 5,
+    padding: 10,
     elevation: 2,
-  },
-  addButtonText: {
-    color: colors.backgroundColor,
-    fontWeight: '900',
-    fontSize: 16,
-    textAlign: 'center',
   },
   ScrollView: {
     height: '100%',
     marginTop: 25,
     marginVertical: 15,
     marginHorizontal: 15,
-  },
-  modalText: {
-    marginBottom: 35,
-    textAlign: 'left',
-    color: colors.white,
   },
 });
 
